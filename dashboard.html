@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Dashboard</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.css">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/index.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <header>
+         
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+          <ul class="navbar-nav mr-auto">
+              <div class="container" onclick="animatetoggle(this)" >
+                  <div class="bar1"></div>
+                  <div class="bar2"></div>
+                  <div class="bar3"></div>
+                </div>
+          </ul>
+          
+    </header>
+
+    <main role="main">
+      
+      <br>
+      <div id="Dashboard" class="dispContent1">
+        <div class="container-fluid">
+          <div class="row">
+            
+            <nav class="col-md-2  d-md-block bg-light sidebar" id="toggles" style="display:none;">
+              <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#" onclick="dashboard()">
+                      <span data-feather="home"></span>
+                      Dashboard <span class="sr-only">(current)</span>
+                    </a>
+                  </li>
+                  
+                  <li class="nav-item">
+                      <br/>
+                    <a class="nav-link" href="#">
+                      <span data-feather="file"></span>
+                      Resources
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">
+                      <span data-feather="shopping-cart"></span>
+                      Requests
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">
+                      <span data-feather="bar-chart-2"></span>
+                      Map
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="land()">
+                      <span data-feather="file"></span>
+                      People Rescued
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="crop()">
+                      <span data-feather="file"></span>
+                      Crop Info
+                    </a>
+                  </li>
+
+                </ul> 
+              </div>
+            </nav>
+    
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 ">
+              <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                <h1 class="h2">Dashboard</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+
+         
+                </div>
+              </div>
+            </main>
+            
+            
+            
+          </div>
+          
+        </div>
+      </div>
+      
+
+    </main>
+
+    <div class="land-info" id="land" style="height: 200px; width: 1113px; position: relative; float: right;  display: none">
+      <div style="position: relative; align-content: center">
+        <b>Update Land Info </b>
+      </div>
+      <br/>
+      <div>
+          <form class="col s12" id="reg-form">
+              <div class="row">
+                <div class="input-field col s6">
+                    <label for="first_name">First Name</label>
+                  <input id="first_name" class="validate" required="" type="text">
+                  
+                </div>
+                <div class="input-field col s6">
+                    <label for="last_name">Last Name</label>
+                  <input id="last_name" class="validate" required="" type="text">
+                  
+                </div>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="input-field col s12">
+                    <label for="email">Soil   Type </label>
+                  <input id="email" class="validate" required="" type="text" style="position: relative;left: 10px;">
+                  
+                </div>
+              </div>
+              <br/>
+              
+              <div class="row">
+                <div class="input-field col s12">
+                    <label for="password">Owner</label>
+                  <input id="password" class="validate" minlength="6" required="" type="text" style="position: relative;left: 30px;">
+                  
+                </div>
+              </div>
+        
+                <br/>
+        
+                <div class="input-field col s6">
+                  <button class="btn btn-large btn-register waves-effect waves-light" type="submit" name="action" style="background-color: lightgreen">
+                    <i class="material-icons right">Done</i>
+                  </button>
+                </div>
+              </div>
+            </form>
+
+      </div>
+      
+    </div>
+
+
+
+    <div class="crop-info" id="crop" style="height: 200px; width: 1113px; position: relative; float: right; display: none">
+        <div style="position: relative; align-content: center">
+          <b>Update Crop-Info </b>
+        </div>
+        <br/>
+        <div>
+            <form class="col s12" id="reg-form">
+                <div class="row">
+                  <div class="input-field col s6">
+                      <label for="first_name">First Name</label>
+                    <input id="first_name" class="validate" required="" type="text" style="position: relative; left: 71px;">
+                    
+                  </div>
+                  <div class="input-field col s6">
+                      <label for="last_name">Last Name</label>
+                    <input id="last_name" class="validate" required="" type="text">
+                    
+                  </div>
+                </div>
+                <br/>
+                <div class="row">
+                  <div class="input-field col s12">
+                      <label for="email">Moisture - Required</label>
+                    <input id="email" class="validate" required="" type="text" style="position: relative;left: 10px;">
+                    
+                  </div>
+                </div>
+                <br/>
+                
+                <div class="row">
+                  <div class="input-field col s12">
+                      <label for="password">Description</label>
+                    <input id="password" class="validate" minlength="6" required="" type="text" style="position: relative;left: 67px;">
+                    
+                  </div>
+                </div>
+          
+                  <br/>
+          
+                  <div class="input-field col s6">
+                    <button class="btn btn-large btn-register waves-effect waves-light" type="submit" name="action" style="background-color: lightgreen">
+                      <i class="material-icons right">Done</i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+  
+        </div>
+        
+      </div>
+
+
+    <script>window.$ = window.jQuery = require("./js/jquery.min.js")</script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/dashboard.js"></script>
+    <script>function animatetoggle(x) {
+      x.classList.toggle("change");
+      var ob = document.getElementById("toggles");
+      ob.style.backgroundColor = "#89897d";
+      ob.style.height = "259px";
+      if(ob.style.display=="none"){
+      ob.style.display="block";
+      }
+      else{
+        ob.style.display="none";
+      }
+  }</script>
+  </body>
+</html>
