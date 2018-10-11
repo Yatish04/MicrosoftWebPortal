@@ -25,7 +25,8 @@ function Get(yourUrl){
 }
 
 window.onload = function(){
-	var json_obj = JSON.parse(Get("https://rvngo.azurewebsites.net/ngo/resources"));
+	//var json_obj = JSON.parse(Get("https://rvngo.azurewebsites.net/ngo/resources"));
+	var json_obj = JSON.parse(Get("http://127.0.0.1:8080/ngo/resources"));
 	console.log("this is the author name: "+json_obj.data);
 	var doms = this.document.getElementById("replace").innerHTML = json_obj.data
 }
