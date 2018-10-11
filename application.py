@@ -23,10 +23,12 @@ def resources():
     donated = donate.find()
     for cur in donated:
         res+="<tr>"
-        for attr in cur:
-            if attr == "_id":
-                continue
-            res+="<td>"+str(cur[attr])+"</td>"
+        
+        res+="<td>"+str(cur["Name"])+"</td>"
+        res+="<td>"+str(cur["Phone Number"])+"</td>"
+        res+="<td>"+str(cur["Address"])+"</td>"
+        res+="<td>"+str(cur["City"])+"</td>"
+        res+="<td>"+str(cur["items"])+"</td>"
         res+="</tr>"
 
     return json.dumps({"status":200,"data":res})
