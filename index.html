@@ -4,8 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <title>NGO</title>
-    <link rel="stylesheet" href="css/style.css">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script   src= "{{ url_for('static',filename='js/login.js') }}"> </script>
+
+
 </head>
 
 <body>
@@ -23,7 +26,7 @@
             <input type="password" name="password" placeholder="password">
             
         </form>
-        <button style="position: absolute;; left: 50%; top: 60%">Submit</button>
+        <button id="login" onclick="loaddashboard()" style="position: absolute;; left: 50%; top: 60%" >Submit</button>
     </div>
    </div>
     <!-- stats - count particles --> 
@@ -32,8 +35,8 @@
     
     
 
-    <script  src="js/index.js"></script>
 
 </body>
+<script   src= "{{ url_for('static',filename='js/index.js') }}"> </script>
 
 </html>
