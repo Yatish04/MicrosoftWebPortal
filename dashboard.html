@@ -118,15 +118,15 @@
       </section>      
     </div>
 
-    <div id="camps" class="campstatus" style="position: absolute; left:17%; width:80%; display:none">
+    <div id="camps" class="campstatus" style="display:none; position: relative; left: 20%; ">
 <!-- cards go here with names and charts-->
       <div id="mymap" style="position:relative; height:400px">
-          <canvas id="myres" style="position: relative;"></canvas>
+          <canvas id="myres" style="position: absolute; width:100% ; height:300px;"></canvas>
       </div>
       <br/>
       <hr/>
 
-      <div id="update" style="position: relative;">
+      <div id="update" style="position: relative; left:20%; width:80%;">
         <h4>Update/Add form</h4>
         <form >
           <label>Name :</label> <input type="text" name="name" id="name" placeholder="Name"><br>
@@ -146,7 +146,7 @@
       <br/>
       <hr/>
 
-      <div id="delete" style="position: relative;">
+      <div id="delete" style="position: relative; left:20%; width:80%;">
           <h4>Delete/Donated Form</h4>
           <form >
             <label>Name :</label> <input type="text" name="name1" id="name1"><br>
@@ -157,6 +157,7 @@
               <option value="Kg">Kg</option>
               <option value="Others">Others</option>
             </select>
+            <br/>
 
             <button class="button button2" type="button" onclick="deleteResources()">Delete</button>
            
