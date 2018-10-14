@@ -46,7 +46,7 @@
                   
                   <li class="nav-item">
                       <br/>
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="#" onclick="myResources()">
                       <span data-feather="file"></span>
                       Resources
                     </a>
@@ -58,13 +58,13 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="#" onclick="campStatus()">
                       <span data-feather="bar-chart-2"></span>
-                      Map
+                      Camp Staus
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="land()">
+                    <a class="nav-link" href="#" >
                       <span data-feather="file"></span>
                       People Rescued
                     </a>
@@ -94,7 +94,7 @@
 
     </main>
 
-    <div class="land-info" id="land" style="position: absolute; left:17%; width:80%">
+    <div class="land-info" id="land" style="position: absolute; left:17%; width:80%; display: block;">
       <section class="container">
 
       <div>
@@ -118,58 +118,18 @@
       </section>      
     </div>
 
+    <div class="campstatus" style="display:none">
+<!-- cards go here-->
+
+    </div>
+
+    <div class="myresources" style="display:none;">
+
+    </div>
 
 
-    <div class="crop-info" id="crop" style="height: 200px; width: 1113px; position: relative; float: right; display: none">
-        <div style="position: relative; align-content: center">
-          <b>Update Crop-Info </b>
-        </div>
-        <br/>
-        <div>
-            <form class="col s12" id="reg-form">
-                <div class="row">
-                  <div class="input-field col s6">
-                      <label for="first_name">First Name</label>
-                    <input id="first_name" class="validate" required="" type="text" style="position: relative; left: 71px;">
-                    
-                  </div>
-                  <div class="input-field col s6">
-                      <label for="last_name">Last Name</label>
-                    <input id="last_name" class="validate" required="" type="text">
-                    
-                  </div>
-                </div>
-                <br/>
-                <div class="row">
-                  <div class="input-field col s12">
-                      <label for="email">Moisture - Required</label>
-                    <input id="email" class="validate" required="" type="text" style="position: relative;left: 10px;">
-                    
-                  </div>
-                </div>
-                <br/>
-                
-                <div class="row">
-                  <div class="input-field col s12">
-                      <label for="password">Description</label>
-                    <input id="password" class="validate" minlength="6" required="" type="text" style="position: relative;left: 67px;">
-                    
-                  </div>
-                </div>
-          
-                  <br/>
-          
-                  <div class="input-field col s6">
-                    <button class="btn btn-large btn-register waves-effect waves-light" type="submit" name="action" style="background-color: lightgreen">
-                      <i class="material-icons right">Done</i>
-                    </button>
-                  </div>
-                </div>
-              </form>
-  
-        </div>
-        
-      </div>
+
+    
       <script   src= "{{ url_for('static',filename='js/dashboard.js') }}"> </script>
 
   

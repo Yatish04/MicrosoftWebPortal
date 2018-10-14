@@ -1,57 +1,57 @@
 particlesJS("particles-js", {
   "particles": {
     "number": {
-      "value": 88,
+      "value": 80,
       "density": {
         "enable": true,
-        "value_area": 700
+        "value_area": 800
       }
     },
     "color": {
-      "value": ["#14e818", "#ffed00", "#2e00ff", "#ff0000"]
+      "value": "#ffffff"
     },
     "shape": {
       "type": "circle",
       "stroke": {
         "width": 0,
-        "color": "#000000  "
+        "color": "#000000"
       },
       "polygon": {
-        "nb_sides": 15
+        "nb_sides": 5
       }
     },
     "opacity": {
-      "value": 0.6,
+      "value": 0.5,
       "random": false,
       "anim": {
         "enable": false,
-        "speed": 2.0,
-        "opacity_min": 0.15,
+        "speed": 1,
+        "opacity_min": 0.1,
         "sync": false
       }
     },
     "size": {
-      "value": 2.5,
-      "random": false,
+      "value": 3,
+      "random": true,
       "anim": {
-        "enable": true,
-        "speed": 2,
-        "size_min": 0.15,
+        "enable": false,
+        "speed": 40,
+        "size_min": 0.1,
         "sync": false
       }
     },
     "line_linked": {
       "enable": true,
-      "distance": 110,
+      "distance": 150,
       "color": "#ffffff",
-      "opacity": 0.3,
-      "width": 2
+      "opacity": 0.4,
+      "width": 1
     },
     "move": {
       "enable": true,
-      "speed": 1.6,
+      "speed": 6,
       "direction": "none",
-      "random": false,
+      "random": true,
       "straight": false,
       "out_mode": "out",
       "bounce": false,
@@ -66,18 +66,18 @@ particlesJS("particles-js", {
     "detect_on": "canvas",
     "events": {
       "onhover": {
-        "enable": false,
-        "mode": "repulse"
+        "enable": true,
+        "mode": "grab"
       },
       "onclick": {
-        "enable": false,
+        "enable": true,
         "mode": "push"
       },
       "resize": true
     },
     "modes": {
       "grab": {
-        "distance": 400,
+        "distance": 140,
         "line_linked": {
           "opacity": 1
         }
@@ -103,21 +103,42 @@ particlesJS("particles-js", {
   },
   "retina_detect": true
 });
-var count_particles, stats, update;
-stats = new Stats;
-stats.setMode(0);
-stats.domElement.style.position = 'absolute';
-stats.domElement.style.left = '0px';
-stats.domElement.style.top = '0px';
-document.body.appendChild(stats.domElement);
-count_particles = document.querySelector('.js-count-particles');
-update = function() {
-  stats.begin();
-  stats.end();
-  if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
-    count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
-  }
-  requestAnimationFrame(update);
-};
-requestAnimationFrame(update);;
 
+$(document).ready(function() {
+  var options = {
+    initColor: '#0491A4',
+    maxColors: 10,
+    colors: [],
+    interval: 3000
+  };
+  for (var i = 0; i <= options.maxColors; i++) {
+    ChangeItNow();
+  }
+
+  function RandomColor() {
+    
+    color = "#31349a"
+    return color;
+  }
+
+  function setBackgroundColor(color) {
+    $('#particles-js').css('background-color', color);
+  }
+
+  setInterval(ChangeItNow, options.interval);
+
+  function ChangeItNow() {
+    var newColor = RandomColor();
+    setBackgroundColor(newColor);
+    options.colors.push(newColor);
+    if (options.colors.length > options.maxColors) {
+      options.colors = [];
+      $("#colors li").remove();
+    }
+    $("#colors").append('<li style="background-color: ' + newColor + '" class="color" title=""> </li>');
+    $("#colors li").on('click', function(e) {
+      setBackgroundColor($(this).css('background-color'));
+    });
+  }
+
+});

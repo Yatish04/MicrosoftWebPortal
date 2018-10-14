@@ -7,6 +7,12 @@
   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script   src= "{{ url_for('static',filename='js/login.js') }}"> </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel= "stylesheet" type= "text/css" href= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel= "stylesheet" type= "text/css" href= "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
+    <link rel= "stylesheet" type= "text/css" href= "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel= "stylesheet" type= "text/css" href= "https://fonts.googleapis.com/css?family=Poiret+One">
+
 
 
 </head>
@@ -14,21 +20,33 @@
 <body>
 
   <!-- particles.js container -->
-   <div id="particles-js">
-    <p  class="titles">
-        <font face="Courier New" size="4" color="#bdbd0f">NGO Login
-
-        </font></p>   
-    <div id="forms" >
-        <form class="forms">
-            <input type="email" name="E-Mail" placeholder="someone@domain.com"><br/>
-            <br/>
-            <input type="password" name="password" placeholder="password">
-            
-        </form>
-        <button id="login" onclick="loaddashboard()" style="position: absolute;; left: 50%; top: 60%" >Submit</button>
+   <div id="particles-js"></div>
+    <div style="position: absolute;top: 33%;left: 29%;">
+        
+            <div style="color: white;width: 350px;position: relative;left: 30%; top: 30%;">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h3 style="color: black;left: 29%;position: relative;">Ngo Login</h3>
+                            <form>
+                                <div class="input-group login-userinput">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                                    <input id="txtUser" type="text" class="form-control" name="username" placeholder="Username">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                    <input  id="txtPassword" type="password" class="form-control" name="password" placeholder="Password">
+                                    <span id="showPassword" class="input-group-btn"></span>  
+                                </div>
+                                <button class="btn btn-primary btn-block login-button" type="button" onclick="loaddashboard()" ><i class="fa fa-sign-in"></i> Login</button>
+                                <div class="checkbox login-options">
+                                        <label><input type="checkbox"/> Remember Me</label>
+                                        <a href="#" class="login-forgot">Forgot Username/Password?</a>
+                            </form>			
+                        </div>
+                    </div>
+                </div>
     </div>
-   </div>
+   
     <!-- stats - count particles --> 
   
      
