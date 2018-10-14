@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <title>Dashboard</title>
 
     <!-- Bootstrap core CSS -->
@@ -118,8 +118,55 @@
       </section>      
     </div>
 
-    <div class="campstatus" style="display:none">
-<!-- cards go here-->
+    <div id="camps" class="campstatus" style="position: absolute; left:17%; width:80%; display:none">
+<!-- cards go here with names and charts-->
+      <div id="mymap" style="position:relative; height:400px">
+          <canvas id="myres" style="position: relative; width:100% ; height:300px;"></canvas>
+      </div>
+      <br/>
+      <hr/>
+
+      <div id="update" style="position: relative;">
+        <h4>Update/Add form</h4>
+        <form >
+          <label>Name :</label> <input type="text" name="name" id="name" placeholder="Name"><br>
+          <label>Quantity :</label><input type="text" name="qty" id="qty"><br>
+          <label>Unit :</label> 
+          <select id="dropdown">
+              <option value="Number">Number</option>
+              <option value="Kg">Kg</option>
+              <option value="Others">Others</option>
+            </select>
+          <br/>
+          <button class="button button2" type="button" onclick="updateResources()">Update</button>
+
+        </form>
+      </div>
+
+      <br/>
+      <hr/>
+
+      <div id="delete" style="position: relative;">
+          <h4>Delete/Donated Form</h4>
+          <form >
+            <label>Name :</label> <input type="text" name="name1" id="name1"><br>
+            <label>Quantity: </label> <input type="text" name="qty1" id="qty1"><br>
+            <label>Unit :</label> 
+            <select id="dropdown1">
+              <option value="Number">Number</option>
+              <option value="Kg">Kg</option>
+              <option value="Others">Others</option>
+            </select>
+
+            <button class="button button2" type="button" onclick="deleteResources()">Delete</button>
+           
+  
+          </form>
+        </div>
+        
+        <br/>
+        <hr/>
+
 
     </div>
 

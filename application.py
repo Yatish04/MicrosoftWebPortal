@@ -1,5 +1,6 @@
 from flask import *
 import pymongo
+from bson import ObjectId
 
 app = Flask(__name__,template_folder=".")
 
@@ -32,3 +33,53 @@ def resources():
         res+="</tr>"
 
     return json.dumps({"status":200,"data":res})
+
+@app.route('/ngo/myresources',methods=["GET"])
+def get_db():
+    uri = "mongodb://yatish:O7EsukGSyf4XSr1rCo3QaskijO5KA5VoX2lPps9KM8eJVxKUdEg1KdcxvIYs9R1QsYRIq8oNf6E1osIshY3E2A==@yatish.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
+    client = pymongo.MongoClient(uri)
+    db = client.Azure
+    ref = db.ngo_data
+    curr = ref.find_one({"_id":ObjectId("5bbdfe4a5c19951ceb09befe")})
+    res={}
+    res["data"] = curr["myresources"]
+    return json.dumps(res)
+
+@app.route('/ngo/myresources/update', methods=["POST"])
+def updateones():
+    uri = "mongodb://yatish:O7EsukGSyf4XSr1rCo3QaskijO5KA5VoX2lPps9KM8eJVxKUdEg1KdcxvIYs9R1QsYRIq8oNf6E1osIshY3E2A==@yatish.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
+    client = pymongo.MongoClient(uri)
+    db = client.Azure
+    ref = db.ngo_data
+    req = request.get_json()
+    curr = ref.find_one({"_id":ObjectId("5bbdfe4a5c19951ceb09befe")})
+    temp={}
+    keys = req["name"]+'('+req["type"]+')'
+    temp[keys] = req["qty"]
+    if keys not in curr:
+        curr["myresources"][keys] = req["qty"]
+    else:
+        curr["myresources"][keys] +=int(req["qty"])
+    ref.update_one({"_id":ObjectId("5bbdfe4a5c19951ceb09befe")},{"$set":curr},upsert=False)
+    return json.dumps({"status":"200"})
+
+@app.route('/ngo/myresources/delete', methods=["POST"])
+def deleteones():
+    uri = "mongodb://yatish:O7EsukGSyf4XSr1rCo3QaskijO5KA5VoX2lPps9KM8eJVxKUdEg1KdcxvIYs9R1QsYRIq8oNf6E1osIshY3E2A==@yatish.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
+    client = pymongo.MongoClient(uri)
+    db = client.Azure
+    ref = db.ngo_data
+    ref = db.ngo_data
+    req = request.get_json()
+    curr = ref.find_one({"_id":ObjectId("5bbdfe4a5c19951ceb09befe")})
+    temp={}
+    keys = req["name"]+'('+req["type"]+')'
+    temp[keys] = req["qty"]
+    if keys not in curr["myresources"]:
+        curr["myresources"][keys] = 0
+    else:
+        curr["myresources"][keys] = str(int(curr["myresources"][keys]) - int(req["qty"]))
+        if int(curr["myresources"][keys]) <0:
+            curr["myresources"][keys] = "0"
+    ref.update_one({"_id":ObjectId("5bbdfe4a5c19951ceb09befe")},{"$set":curr},upsert=False)
+    return json.dumps({"status":"200"})
