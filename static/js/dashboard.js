@@ -136,6 +136,11 @@ window.onload = function(){
 	var doms = this.document.getElementById("replace").innerHTML = json_obj.data
 }
 
+function dashhome(){
+	var ob = document.getElementById("land").style.display="block";
+	var ob1 = document.getElementById("camps").style.display="none";
+}
+
 
 
 (function(document) {
