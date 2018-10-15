@@ -1,6 +1,10 @@
 function myResources(){
+	var loader1 = document.getElementById("loader");
+	loader1.style.display="block"; 
 	var ob = document.getElementById("land").style.display="none";
-	var ob1 = document.getElementById("camps").style.display="block";
+	
+	
+	
 	var json_obj = JSON.parse(Get("https://rvngo.azurewebsites.net/ngo/myresources"));
 	console.log("this is the author name: "+json_obj.data);
 	var temp = json_obj.data;
@@ -16,9 +20,12 @@ function myResources(){
 	for(i in labels){
 		console.log(i)
 	}
+	
 	console.log(labels);
 	console.log(values);
-	plot(labels,values)
+	var ob1 = document.getElementById("camps").style.display="block";
+	plot(labels,values);
+	loader1.style.display="none";
 	return;
 }
 
@@ -80,8 +87,6 @@ request.send(JSON.stringify({name:name,qty:qty,type:type}));
 	// console.log(json_obj.status)
 
 }
-
-
 
 
 
