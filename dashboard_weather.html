@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Dashboard</title>
+
+    <!-- Bootstrap core CSS -->
+    
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/bootstrap.css') }}">
+
+    <!-- Custom styles for this template -->
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/index.css') }}">
+
+    <style>
+      /* Center the loader */
+      #loader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 1;
+        width: 150px;
+        height: 150px;
+        margin: -75px 0 0 -75px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }
+      
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      /* Add animation to "page content" */
+      .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s
+      }
+      
+      @-webkit-keyframes animatebottom {
+        from { bottom:-100px; opacity:0 } 
+        to { bottom:0px; opacity:1 }
+      }
+      
+      @keyframes animatebottom { 
+        from{ bottom:-100px; opacity:0 } 
+        to{ bottom:0; opacity:1 }
+      }
+      
+      #myDiv {
+        display: none;
+        text-align: center;
+      }
+      </style>
+
+
+
+
+  </head>
+  <body>
+
+    <header>
+         
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+          <ul class="navbar-nav mr-auto">
+              <div class="container" onclick="animatetoggle(this)" >
+                  <div class="bar1"></div>
+                  <div class="bar2"></div>
+                  <div class="bar3"></div>
+                </div>
+          </ul>
+          
+    </header>
+
+    <main role="main">
+      
+      <br>
+      <div id="Dashboard" class="dispContent1">
+        <div class="container-fluid">
+          <div class="row">
+            
+            <nav class="col-md-2  d-md-block bg-light sidebar" id="toggles" style="display:none;">
+              <div class="sidebar-sticky" style="position:relative">
+                <ul class="nav flex-column">
+                
+                  
+                  <li class="nav-item">
+                      <br/>
+                    <a class="nav-link" href="#" onclick="myResources()">
+                      <span data-feather="file"></span>
+                      Send Warnings
+                    </a>
+                  </li>
+            
+                  
+                </ul> 
+              </div>
+            </nav>
+    
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 ">
+              <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                <h1 class="h2">Dashboard</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+         
+                </div>
+              </div>
+            </main>
+            
+            
+            
+          </div>
+          
+        </div>
+      </div>
+      
+
+    </main>
+
+    <div class="land-info" id="land" style="position: absolute; left:17%; width:80%; display: block;">
+      
+      <section class="container">
+
+        <input id="search" class="light-table-filter" data-table="order-table" placeholder="Filter">
+      <!-- input text-->
+        
+      
+      </section>      
+    </div>
+
+   <!-- <div id="loader" style="display:none;"></div> -->
+
+   
+
+
+
+    
+      <script   src= "{{ url_for('static',filename='js/weather.js') }}"> </script>
+
+  
+
+    <script>function animatetoggle(x) {
+      x.classList.toggle("change");
+      var ob = document.getElementById("toggles");
+      ob.style.backgroundColor = "#89897d";
+      ob.style.height = "259px";
+      if(ob.style.display=="none"){
+      ob.style.display="block";
+      }
+      else{
+        ob.style.display="none";
+      }
+  }</script>
+
+<script>
+  $(document).ready(function(){
+    $("#search").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#replace tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+  </script>
+  </body>
+</html>

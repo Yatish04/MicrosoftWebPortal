@@ -12,6 +12,9 @@ def login():
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route("/weather/dashboard",methods=["GET"])
+def renderdash():
+    return render_template('dashboard_weather.html')
 @app.route('/ngo/resources',methods=['GET'])
 def resources():
     # if "E-mail" not in session:
@@ -80,6 +83,7 @@ def deleteones():
     else:
         curr["myresources"][keys] = str(int(curr["myresources"][keys]) - int(req["qty"]))
         if int(curr["myresources"][keys]) <0:
-            curr["myresources"][keys] = "0"
+            # curr["myresources"][keys] = "0"
+            del curr["myresources"][keys]
     ref.update_one({"_id":ObjectId("5bbdfe4a5c19951ceb09befe")},{"$set":curr},upsert=False)
     return json.dumps({"status":"200"})
