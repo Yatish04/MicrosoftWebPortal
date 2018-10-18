@@ -15,58 +15,34 @@
     <!-- Custom styles for this template -->
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/index.css') }}">
 
+    <script  type= "text/javascript" href= "{{ url_for('static',filename='js/weather.js') }}"></script>
+
     <style>
-      /* Center the loader */
-      #loader {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        z-index: 1;
-        width: 150px;
-        height: 150px;
-        margin: -75px 0 0 -75px;
-        border: 16px solid #f3f3f3;
-        border-radius: 50%;
-        border-top: 16px solid #3498db;
-        width: 120px;
-        height: 120px;
-        -webkit-animation: spin 2s linear infinite;
-        animation: spin 2s linear infinite;
-      }
       
-      @-webkit-keyframes spin {
-        0% { -webkit-transform: rotate(0deg); }
-        100% { -webkit-transform: rotate(360deg); }
-      }
-      
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-      
-      /* Add animation to "page content" */
-      .animate-bottom {
-        position: relative;
-        -webkit-animation-name: animatebottom;
-        -webkit-animation-duration: 1s;
-        animation-name: animatebottom;
-        animation-duration: 1s
-      }
-      
-      @-webkit-keyframes animatebottom {
-        from { bottom:-100px; opacity:0 } 
-        to { bottom:0px; opacity:1 }
-      }
-      
-      @keyframes animatebottom { 
-        from{ bottom:-100px; opacity:0 } 
-        to{ bottom:0; opacity:1 }
-      }
-      
-      #myDiv {
-        display: none;
-        text-align: center;
-      }
+    
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.button1 {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.button2:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
       </style>
 
 
@@ -135,12 +111,26 @@
     <div class="land-info" id="land" style="position: absolute; left:17%; width:80%; display: block;">
       
       <section class="container">
+        <div style="position:relative; left: -100px; ">
 
-        <input id="search" class="light-table-filter" data-table="order-table" placeholder="Filter">
-      <!-- input text-->
-        
+        <label style="position: relative; left:-10px;">Title:</label>
+        <br/>
+        <input id="title" class="light-table-filter" data-table="order-table" placeholder="" style="position: relative;left: 102px;">
+      </div>
       
-      </section>      
+        <!-- input text-->
+        <br/>
+        
+
+        <form>
+          <div class="form-group">
+            <label for="comment" style="position: relative; left: -62px;">Comment:</label>
+            <textarea class="form-control" rows="5" id="alert"></textarea>
+          </div>
+        </form>
+        <button class="button button2" onclick="weather()">Alert Users</button> 
+      </section>
+         
     </div>
 
    <!-- <div id="loader" style="display:none;"></div> -->
