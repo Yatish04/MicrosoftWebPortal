@@ -29,7 +29,7 @@ def resources():
         res+="<tr>"
         
         res+="<td>"+str(cur["Name"])+"</td>"
-        res+="<td>"+str(cur["Phone Number"])+"</td>"
+        res+="<td>"+str(cur["phone_number"])+"</td>"
         res+="<td>"+str(cur["Address"])+"</td>"
         res+="<td>"+str(cur["City"])+"</td>"
         res+="<td>"+str(cur["items"])+"</td>"
