@@ -5,7 +5,7 @@ function myResources(){
 	
 	
 	
-	var json_obj = JSON.parse(Get("http://rvngo.azurewebsites.net/ngo/myresources"));
+	var json_obj = JSON.parse(Get("https://rvngo.azurewebsites.net/ngo/myresources"));
 	console.log("this is the author name: "+json_obj.data);
 	var temp = json_obj.data;
 	labels= new Array();
@@ -49,7 +49,7 @@ function updateResources(){
             
     }
     };
-    request.open("POST",'http://rvngo.azurewebsites.net/ngo/myresources/update',true);
+    request.open("POST",'https://rvngo.azurewebsites.net/ngo/myresources/update',true);
     request.setRequestHeader('Content-Type','application/json');
 request.send(JSON.stringify({name:name,qty:qty,type:type}));
 
@@ -80,7 +80,7 @@ function deleteResources(){
             
     }
     };
-    request.open("POST",'http://rvngo.azurewebsites.net/ngo/myresources/delete',true);
+    request.open("POST",'https://rvngo.azurewebsites.net/ngo/myresources/delete',true);
     request.setRequestHeader('Content-Type','application/json');
 request.send(JSON.stringify({name:name,qty:qty,type:type}));
 
@@ -135,7 +135,7 @@ function Get(yourUrl){
 
 
 window.onload = function(){
-	var json_obj = JSON.parse(Get("http://rvngo.azurewebsites.net/ngo/resources"));
+	var json_obj = JSON.parse(Get("https://rvngo.azurewebsites.net/ngo/resources"));
 	
 	console.log("this is the author name: "+json_obj.data);
 	var doms = this.document.getElementById("replace").innerHTML = json_obj.data
