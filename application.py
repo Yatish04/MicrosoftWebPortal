@@ -17,6 +17,7 @@ def renderdash():
     return render_template('dashboard_weather.html')
 @app.route('/ngo/resources',methods=['GET'])
 def resources():
+    import pdb; pdb.set_trace()
     # if "E-mail" not in session:
     #     return json.dumps({"status":500})
     uri = "mongodb://yatish:O7EsukGSyf4XSr1rCo3QaskijO5KA5VoX2lPps9KM8eJVxKUdEg1KdcxvIYs9R1QsYRIq8oNf6E1osIshY3E2A==@yatish.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
@@ -59,10 +60,11 @@ def updateones():
     temp={}
     keys = req["name"]+'('+req["type"]+')'
     temp[keys] = req["qty"]
-    if keys not in curr:
+    if keys not in curr["myresources"]:
         curr["myresources"][keys] = req["qty"]
     else:
-        curr["myresources"][keys] +=int(req["qty"])
+        temp = int(curr["myresources"][keys])
+        curr["myresources"][keys] = str(temp+int(req["qty"]))
     ref.update_one({"_id":ObjectId("5bbdfe4a5c19951ceb09befe")},{"$set":curr},upsert=False)
     return json.dumps({"status":"200"})
 
@@ -79,7 +81,7 @@ def deleteones():
     keys = req["name"]+'('+req["type"]+')'
     temp[keys] = req["qty"]
     if keys not in curr["myresources"]:
-        curr["myresources"][keys] = 0
+        curr["myresources"][keys] = "0"
     else:
         curr["myresources"][keys] = str(int(curr["myresources"][keys]) - int(req["qty"]))
         if int(curr["myresources"][keys]) <0:
