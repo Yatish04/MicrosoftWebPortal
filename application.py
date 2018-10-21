@@ -17,7 +17,7 @@ def renderdash():
     return render_template('dashboard_weather.html')
 @app.route('/ngo/resources',methods=['GET'])
 def resources():
-    import pdb; pdb.set_trace()
+    
     # if "E-mail" not in session:
     #     return json.dumps({"status":500})
     uri = "mongodb://yatish:O7EsukGSyf4XSr1rCo3QaskijO5KA5VoX2lPps9KM8eJVxKUdEg1KdcxvIYs9R1QsYRIq8oNf6E1osIshY3E2A==@yatish.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
