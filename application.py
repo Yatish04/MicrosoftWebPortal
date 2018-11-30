@@ -50,7 +50,7 @@ def get_db():
     client = pymongo.MongoClient(uri)
     db = client.Azure
     ref = db.ngo_data
-    curr = ref.find_one({"_id":ObjectId("5c017a385c19953eb9a0497c")})
+    curr = ref.find_one({"_id":"0"})
     res={}
     res["data"] = curr["myresources"]
     return json.dumps(res)
@@ -62,7 +62,7 @@ def updateones():
     db = client.Azure
     ref = db.ngo_data
     req = request.get_json()
-    curr = ref.find_one({"_id":ObjectId("5c017a385c19953eb9a0497c")})
+    curr = ref.find_one({"_id":"0"})
     temp={}
     keys = req["name"]+'('+req["type"]+')'
     temp[keys] = req["qty"]
@@ -71,7 +71,7 @@ def updateones():
     else:
         temp = int(curr["myresources"][keys])
         curr["myresources"][keys] = str(temp+int(req["qty"]))
-    ref.update_one({"_id":ObjectId("5c017a385c19953eb9a0497c")},{"$set":curr},upsert=False)
+    ref.update_one({"_id":"0"},{"$set":curr},upsert=False)
     return json.dumps({"status":"200"})
 
 @app.route('/ngo/myresources/delete', methods=["POST"])
@@ -82,7 +82,7 @@ def deleteones():
     ref = db.ngo_data
     ref = db.ngo_data
     req = request.get_json()
-    curr = ref.find_one({"_id":ObjectId("5c017a385c19953eb9a0497c")})
+    curr = ref.find_one({"_id":"0"})
     temp={}
     keys = req["name"]+'('+req["type"]+')'
     temp[keys] = req["qty"]
