@@ -26,7 +26,7 @@ def resources():
 
     # if "E-mail" not in session:
     #     return json.dumps({"status":500})
-    uri = "mongodb://yatish:O7EsukGSyf4XSr1rCo3QaskijO5KA5VoX2lPps9KM8eJVxKUdEg1KdcxvIYs9R1QsYRIq8oNf6E1osIshY3E2A==@yatish.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
+    uri = "mongodb://yatishhr:pXYRVwZL2myXglrdgLSwAVKUb5U8AnbN1m83JXogbpKXlmwBBOdk4Py6s7EgBGsJoWRvTFJ6o7nNDY1n99HHMw==@yatishhr.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
     client = pymongo.MongoClient(uri)
     db = client.Azure
     donate = db.resources
@@ -46,23 +46,23 @@ def resources():
 
 @app.route('/ngo/myresources',methods=["GET"])
 def get_db():
-    uri = "mongodb://yatish:O7EsukGSyf4XSr1rCo3QaskijO5KA5VoX2lPps9KM8eJVxKUdEg1KdcxvIYs9R1QsYRIq8oNf6E1osIshY3E2A==@yatish.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
+    uri = "mongodb://yatishhr:pXYRVwZL2myXglrdgLSwAVKUb5U8AnbN1m83JXogbpKXlmwBBOdk4Py6s7EgBGsJoWRvTFJ6o7nNDY1n99HHMw==@yatishhr.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
     client = pymongo.MongoClient(uri)
     db = client.Azure
     ref = db.ngo_data
-    curr = ref.find_one({"_id":ObjectId("5bbdfe4a5c19951ceb09befe")})
+    curr = ref.find_one({"_id":ObjectId("5c017a385c19953eb9a0497c")})
     res={}
     res["data"] = curr["myresources"]
     return json.dumps(res)
 
 @app.route('/ngo/myresources/update', methods=["POST"])
 def updateones():
-    uri = "mongodb://yatish:O7EsukGSyf4XSr1rCo3QaskijO5KA5VoX2lPps9KM8eJVxKUdEg1KdcxvIYs9R1QsYRIq8oNf6E1osIshY3E2A==@yatish.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
+    uri = "mongodb://yatishhr:pXYRVwZL2myXglrdgLSwAVKUb5U8AnbN1m83JXogbpKXlmwBBOdk4Py6s7EgBGsJoWRvTFJ6o7nNDY1n99HHMw==@yatishhr.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
     client = pymongo.MongoClient(uri)
     db = client.Azure
     ref = db.ngo_data
     req = request.get_json()
-    curr = ref.find_one({"_id":ObjectId("5bbdfe4a5c19951ceb09befe")})
+    curr = ref.find_one({"_id":ObjectId("5c017a385c19953eb9a0497c")})
     temp={}
     keys = req["name"]+'('+req["type"]+')'
     temp[keys] = req["qty"]
@@ -71,18 +71,18 @@ def updateones():
     else:
         temp = int(curr["myresources"][keys])
         curr["myresources"][keys] = str(temp+int(req["qty"]))
-    ref.update_one({"_id":ObjectId("5bbdfe4a5c19951ceb09befe")},{"$set":curr},upsert=False)
+    ref.update_one({"_id":ObjectId("5c017a385c19953eb9a0497c")},{"$set":curr},upsert=False)
     return json.dumps({"status":"200"})
 
 @app.route('/ngo/myresources/delete', methods=["POST"])
 def deleteones():
-    uri = "mongodb://yatish:O7EsukGSyf4XSr1rCo3QaskijO5KA5VoX2lPps9KM8eJVxKUdEg1KdcxvIYs9R1QsYRIq8oNf6E1osIshY3E2A==@yatish.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
+    uri = "mongodb://yatishhr:pXYRVwZL2myXglrdgLSwAVKUb5U8AnbN1m83JXogbpKXlmwBBOdk4Py6s7EgBGsJoWRvTFJ6o7nNDY1n99HHMw==@yatishhr.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
     client = pymongo.MongoClient(uri)
     db = client.Azure
     ref = db.ngo_data
     ref = db.ngo_data
     req = request.get_json()
-    curr = ref.find_one({"_id":ObjectId("5bbdfe4a5c19951ceb09befe")})
+    curr = ref.find_one({"_id":ObjectId("5c017a385c19953eb9a0497c")})
     temp={}
     keys = req["name"]+'('+req["type"]+')'
     temp[keys] = req["qty"]
@@ -93,16 +93,16 @@ def deleteones():
         if int(curr["myresources"][keys]) <0:
             # curr["myresources"][keys] = "0"
             del curr["myresources"][keys]
-    ref.update_one({"_id":ObjectId("5bbdfe4a5c19951ceb09befe")},{"$set":curr},upsert=False)
+    ref.update_one({"_id":"0"},{"$set":curr},upsert=False)
     return json.dumps({"status":"200"})
 
-@app.route('/relief/getassets',methods=["GET"])
-def getassets():
-    uri = "mongodb://yatish:O7EsukGSyf4XSr1rCo3QaskijO5KA5VoX2lPps9KM8eJVxKUdEg1KdcxvIYs9R1QsYRIq8oNf6E1osIshY3E2A==@yatish.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
+@app.route('/relief/<disaster_id>/getassets',methods=["GET"])
+def getassets(disaster_id):
+    uri = "mongodb://yatishhr:pXYRVwZL2myXglrdgLSwAVKUb5U8AnbN1m83JXogbpKXlmwBBOdk4Py6s7EgBGsJoWRvTFJ6o7nNDY1n99HHMw==@yatishhr.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
     client = pymongo.MongoClient(uri)
     db = client.Azure
     ref = db.Victim
-    cursor = ref.find_one({"user_id":"0"})
+    cursor = ref.find_one({"user_id":"0","Disasterid":disaster_id})
     res={}
     res["src"] = cursor["facial"]
     res["analytics"]=cursor["victims"]

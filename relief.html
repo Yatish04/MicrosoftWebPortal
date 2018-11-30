@@ -192,7 +192,7 @@ hr {
 
       window.onload = function()
       {
-      	var json_obj = JSON.parse(Get("http://127.0.0.1:8080/relief/getassets"));
+      	var json_obj = JSON.parse(Get("http://127.0.0.1:8080/relief/0/getassets"));
         src=json_obj["src"];
         analytics=json_obj["analytics"];
         $("#img1").attr("src",src);
