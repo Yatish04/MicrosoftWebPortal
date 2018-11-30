@@ -79,6 +79,9 @@
     <header>
          
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+          <ul class="navbar-nav">
+              <li style="color:white"><a href="http://127.0.0.1:8080/home" style="color:white !important;text-decoration: none;">Home</a></li>
+          </ul>
           <ul class="navbar-nav mr-auto">
               <div class="container" onclick="animatetoggle(this)" >
                   <div class="bar1"></div>
@@ -138,7 +141,7 @@
 
     </main>
 
-    <div class="land-info" id="land" style="position: absolute; left:17%; width:80%; display: block;">
+    <div class="land-info" id="land" style="position: absolute; left:17%; width:80%; display: none;">
       
       <section class="container">
 
@@ -163,7 +166,7 @@
       </section>      
     </div>
 
-    <div id="loader" style="display:none;"></div>
+    <div id="loader" class="loader"></div>
 
     <div id="camps" class="campstatus" style="display:none; position: relative; left: 20%; margin:0;  "onload="myFunction()">
 <!-- cards go here with names and charts-->

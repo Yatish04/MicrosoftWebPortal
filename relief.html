@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <title>Dashboard</title>
+
+    <!-- Bootstrap core CSS -->
+
+    <!-- <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/bootstrap.css') }}"> -->
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="{{ url_for('static',filename='vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/index.css') }}">
+  <style>
+  /* The sidebar menu */
+.sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width:220px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 50px; /* Stay at the top */
+    right: 0;
+    background-color: #111; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    font-family:"Varela Round";
+    text-align: center;
+    color: #FFFFFF;
+    display: block;
+}
+
+hr {
+   display: block;
+   position: relative;
+   padding: 0;
+   margin: 8px auto;
+   height: 0;
+   width: 100%;
+   max-height: 0;
+   font-size: 1px;
+   line-height: 0;
+   clear: both;
+   border: none;
+   border-top: 1px solid #aaaaaa;
+   border-bottom: 1px solid #ffffff;
+}
+
+#loader {
+  position: absolute;
+  left: 50vw;
+  top: 40vh;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+</style>
+  </head>
+  <body>
+
+    <header>
+
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+          <ul class="navbar-nav">
+            <li style="color:white"><a href="http://127.0.0.1:8080/home" style="color:white !important;text-decoration: none;">Home</a></li>
+          </ul>
+          <ul class="navbar-nav mr-auto">
+              <div class="container" onclick="animatetoggle(this)" >
+                  <div class="bar1"></div>
+                  <div class="bar2"></div>
+                  <div class="bar3"></div>
+                </div>
+          </ul>
+      </nav>
+
+    </header>
+
+    <div style="padding-bottom:30px"></div>
+
+    <div class="container fluid">
+
+      <div id="maincontent" style="display:none">
+
+          <!-- Side navigation -->
+          <div class="sidenav">
+            OVERALL<br>
+            ANALYTICS
+            <div style="padding-bottom:10px"></div>
+
+            <p id="mt" style="font-family: 'Varela Round' "></p>
+            <hr style="color:white">
+            <p id="wt" style="font-family: 'Varela Round' "></p>
+            <hr style="color:white">
+            <p id="ct" style="font-family: 'Varela Round' "></p>
+            <hr style="color:white">
+            <p id="et" style="font-family: 'Varela Round' "></p>
+            <hr style="color:white">
+          </div>
+          <div class="row">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+            <div class="card" style="width:85%;">
+              <img class="card-img-top" id="img1" alt="Card image" style="height:40vh">
+              <div class="card-body">
+                <h4 class="card-title">Analytics</h4>
+                <p class="card-text" style="font-family: 'Varela Round' " id="male"></p>
+                <p class="card-text" style="font-family: 'Varela Round' " id="female"></p>
+                <p class="card-text" style="font-family: 'Varela Round' " id="children"></p>
+                <p class="card-text" style="font-family: 'Varela Round' " id="elders"></p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" >
+            <div class="card" style="width:85%" >
+              <img class="card-img-top" alt="Card image" src="{{ url_for('static',filename='images/default2.jpg') }}" style="height:40vh">
+              <div class="card-body">
+                <h4 class="card-title">Analytics</h4>
+                <p class="card-text" style="font-family: 'Varela Round' " id="male">Men: 5</p>
+                <p class="card-text" style="font-family: 'Varela Round' " id="female">Women: 0</p>
+                <p class="card-text" style="font-family: 'Varela Round' " id="children">Children: 0</p>
+                <p class="card-text" style="font-family: 'Varela Round' " id="elders">Elderly: 2</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" >
+            <div class="card" style="width:85%">
+              <img class="card-img-top" src="{{ url_for('static',filename='images/default1.jpeg') }}" alt="Card image" style="height:40vh">
+              <div class="card-body">
+                <h4 class="card-title">Analytics</h4>
+                <p class="card-text" style="font-family: 'Varela Round' " id="male">Men: 6</p>
+                <p class="card-text" style="font-family: 'Varela Round' " id="female">Women: 1</p>
+                <p class="card-text" style="font-family: 'Varela Round' " id="children">Children: 1</p>
+                <p class="card-text" style="font-family: 'Varela Round' " id="elders">Elderly: 0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="loader" id="loader"></div>
+
+    <!-- <div id ="card"  -->
+  </div>
+
+    <script>
+      function Get(yourUrl)
+      {
+          var Httpreq = new XMLHttpRequest(); // a new request
+          Httpreq.open("GET",yourUrl,false);
+          Httpreq.send(null);
+          console.log(Httpreq.responseText);
+          return Httpreq.responseText;
+      }
+
+
+
+      window.onload = function()
+      {
+      	var json_obj = JSON.parse(Get("http://127.0.0.1:8080/relief/getassets"));
+        src=json_obj["src"];
+        analytics=json_obj["analytics"];
+        $("#img1").attr("src",src);
+        $("#male").html("Men: "+analytics["males"]);
+        $("#female").html("Women: "+analytics["female"]);
+        $("#children").html("Children: "+analytics["children"]);
+        $("#elders").html("Elderly :"+analytics["elders"]);
+        maleval=parseInt(analytics["males"])+5+6
+        femaleval=parseInt(analytics["female"])+0+1
+        childval=parseInt(analytics["children"])+0+1
+        elderval=parseInt(analytics["elders"])+2+0
+        $("#mt").html("Total Men: " + maleval)
+        $("#wt").html("Total Women: " +  femaleval)
+        $("#ct").html("Total Children: " + childval)
+        $("#et").html("Total Elderly: " + elderval)
+        $("#img1").on("load",function()
+        {
+          $("#maincontent").show();
+          $("#loader").hide();
+        });
+      }
+    </script>
+
+  </body>
+</html>

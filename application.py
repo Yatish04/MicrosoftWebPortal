@@ -5,6 +5,7 @@ from bson import ObjectId
 app = Flask(__name__,template_folder=".")
 
 @app.route("/",methods=["GET"])
+@app.route("/home",methods=["GET"])
 def login():
     return render_template('index.html')
 
@@ -15,9 +16,14 @@ def dashboard():
 @app.route("/weather/dashboard",methods=["GET"])
 def renderdash():
     return render_template('dashboard_weather.html')
+
+@app.route("/relief/home",methods=["GET"])
+def renderrelief():
+    return render_template('relief.html')
+
 @app.route('/ngo/resources',methods=['GET'])
 def resources():
-    
+
     # if "E-mail" not in session:
     #     return json.dumps({"status":500})
     uri = "mongodb://yatish:O7EsukGSyf4XSr1rCo3QaskijO5KA5VoX2lPps9KM8eJVxKUdEg1KdcxvIYs9R1QsYRIq8oNf6E1osIshY3E2A==@yatish.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
@@ -28,7 +34,7 @@ def resources():
     donated = donate.find()
     for cur in donated:
         res+="<tr>"
-        
+
         res+="<td>"+str(cur["Name"])+"</td>"
         res+="<td>"+str(cur["phone_number"])+"</td>"
         res+="<td>"+str(cur["Address"])+"</td>"
@@ -89,3 +95,16 @@ def deleteones():
             del curr["myresources"][keys]
     ref.update_one({"_id":ObjectId("5bbdfe4a5c19951ceb09befe")},{"$set":curr},upsert=False)
     return json.dumps({"status":"200"})
+
+@app.route('/relief/getassets',methods=["GET"])
+def getassets():
+    uri = "mongodb://yatish:O7EsukGSyf4XSr1rCo3QaskijO5KA5VoX2lPps9KM8eJVxKUdEg1KdcxvIYs9R1QsYRIq8oNf6E1osIshY3E2A==@yatish.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
+    client = pymongo.MongoClient(uri)
+    db = client.Azure
+    ref = db.Victim
+    cursor = ref.find_one({"user_id":"0"})
+    res={}
+    res["src"] = cursor["facial"]
+    res["analytics"]=cursor["victims"]
+    res["status"] = 200
+    return json.dumps(res)
