@@ -79,9 +79,6 @@
     <header>
          
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-          <ul class="navbar-nav">
-              <li style="color:white"><a href="https://rvngo.azurewebsites.net/home" style="color:white !important;text-decoration: none;">Home</a></li>
-          </ul>
           <ul class="navbar-nav mr-auto">
               <div class="container" onclick="animatetoggle(this)" >
                   <div class="bar1"></div>
@@ -100,21 +97,32 @@
           <div class="row">
             
             <nav class="col-md-2  d-md-block bg-light sidebar" id="toggles" style="display:none;">
-              <div class="sidebar-sticky" style="position:relative">
+              <div class="sidebar-sticky" style="position:relative;background:#e8e8e8">
                 <ul class="nav flex-column">
                 
                   
-                  <li class="nav-item">
+                  <li class="nav-item1" style="position:relative;display: inline-block;height: 74px;">
                       <br/>
                     <a class="nav-link" href="#" onclick="myResources()">
                       <span data-feather="file"></span>
-                      My Inventory`
+                      My Inventory
+                      <hr>
                     </a>
                   </li>
-                  <li class="nav-item">
+                  
+                  <li class="nav-item2" style="position:relative;display: inline-block;height: 50px;">
                     <a class="nav-link" href="#" onclick="dashhome()">
                       <span data-feather="shopping-cart"></span>
                       My Requests
+                      <hr>
+                    </a>
+                  </li>
+
+                  <li class="nav-item3" style="position:relative;display: inline-block;height: 50px;">
+                    <a class="nav-link" href="#" onclick="dashhome()">
+                      <span data-feather="shopping-cart"></span>
+                      My Messages
+                      <hr>
                     </a>
                   </li>
                   
@@ -141,7 +149,7 @@
 
     </main>
 
-    <div class="land-info" id="land" style="position: absolute; left:17%; width:80%; display: none;">
+    <div class="land-info" id="land" style="position: absolute; left:17%; width:80%; display: block;">
       
       <section class="container">
 
@@ -166,7 +174,7 @@
       </section>      
     </div>
 
-    <div id="loader" class="loader"></div>
+    <div id="loader" style="display:none;"></div>
 
     <div id="camps" class="campstatus" style="display:none; position: relative; left: 20%; margin:0;  "onload="myFunction()">
 <!-- cards go here with names and charts-->
@@ -234,7 +242,13 @@
 
   
 
-    <script>function animatetoggle(x) {
+    <script>
+    
+    $(".nav-item1, .nav-item2, .nav-item3").hover(function(e) { 
+    $(this).css("background-color",e.type === "mouseenter"?"lightgrey":"transparent") 
+})
+    
+    function animatetoggle(x) {
       x.classList.toggle("change");
       var ob = document.getElementById("toggles");
       ob.style.backgroundColor = "#89897d";
