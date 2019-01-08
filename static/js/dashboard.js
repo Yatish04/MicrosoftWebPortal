@@ -3,11 +3,12 @@ function myResources(){
 	loader1.style.display="block"; 
 	var ob = document.getElementById("land").style.display="none";
 	var ob1 = document.getElementById("camps").style.display="none";
+	var ob1 = document.getElementById("messages").style.display="none";
 	
-	
-	var json_obj = JSON.parse(Get("https://rvngo.azurewebsites.net/ngo/myresources"));
+	var json_obj = JSON.parse(Get("http://rvngo.azurewebsites.net/ngo/myresources"));
 	console.log("this is the author name: "+json_obj.data);
 	var temp = json_obj.data;
+	console.log(temp);
 	labels= new Array();
 	values = new Array();
 	var i;
@@ -49,7 +50,7 @@ function updateResources(){
             
     }
     };
-    request.open("POST",'https://rvngo.azurewebsites.net/ngo/myresources/update',true);
+    request.open("POST",'http://rvngo.azurewebsites.net/ngo/myresources/update',true);
     request.setRequestHeader('Content-Type','application/json');
 request.send(JSON.stringify({name:name,qty:qty,type:type}));
 
@@ -80,7 +81,7 @@ function deleteResources(){
             
     }
     };
-    request.open("POST",'https://rvngo.azurewebsites.net/ngo/myresources/delete',true);
+    request.open("POST",'http://rvngo.azurewebsites.net/ngo/myresources/delete',true);
     request.setRequestHeader('Content-Type','application/json');
 request.send(JSON.stringify({name:name,qty:qty,type:type}));
 
@@ -137,7 +138,7 @@ function Get(yourUrl){
 window.onload = function()
 {
 
-	var json_obj = JSON.parse(Get("https://rvngo.azurewebsites.net/ngo/resources"));
+	var json_obj = JSON.parse(Get("http://rvngo.azurewebsites.net/ngo/resources"));
 	
 	console.log("this is the author name: "+json_obj.data);
 	var doms = this.document.getElementById("replace").innerHTML = json_obj.data
@@ -148,8 +149,88 @@ window.onload = function()
 function dashhome(){
 	var ob = document.getElementById("land").style.display="block";
 	var ob1 = document.getElementById("camps").style.display="none";
+	var ob1 = document.getElementById("messages").style.display="none";
+
 }
 
+
+function dashmessages(){
+	var ob = document.getElementById("land").style.display="none";
+	var ob1 = document.getElementById("camps").style.display="none";
+	
+	var json_obj = JSON.parse(Get("http://rvngo.azurewebsites.net/message/pipeline/gettopic"));
+	
+	
+	var doms = document.getElementById("message-replacer").innerHTML = json_obj.data
+	// console.log(json_obj.data);
+	var ob1 = document.getElementById("messages").style.display="block";
+
+	var ob1 = document.getElementById("thread").style.display="none";
+
+
+
+
+
+}
+
+
+
+function reply(){
+
+	var text=document.getElementById("reply").value;
+	var js1={"message":text.toString(),"user":"Ngo1"};
+	var mid=document.getElementById("indices").innerHTML;
+	document.getElementById("reply").value="";
+
+	console.log(mid);
+	var request=new XMLHttpRequest();
+
+	request.onreadystatechange=function(){
+        if(request.readyState===XMLHttpRequest.DONE){
+            if(request.status===200)
+            {
+                alert('Updated Successfully');
+            }
+            else{
+                alert('Network Error');
+            }
+            
+    }
+    };
+    request.open("POST",'http://rvngo.azurewebsites.net/messages/pipeline/'+mid+'/updatethread',true);
+    request.setRequestHeader('Content-Type','application/json');
+request.send(JSON.stringify(js1));
+
+
+}
+
+
+
+
+
+function showthread(ele){
+	console.log(ele);
+	var ob = document.getElementById("land").style.display="none";
+	var ob1 = document.getElementById("camps").style.display="none";
+	var ob1 = document.getElementById("messages").style.display="none";
+
+	var json_obj = JSON.parse(Get("http://rvngo.azurewebsites.net/messages/pipeline/getthread/"+ele.toString()));
+	
+	
+	var doms = document.getElementById("threadinfo").innerHTML = json_obj.data
+	var doms = document.getElementById("topicname").innerHTML = json_obj.topic
+	var doms = document.getElementById("indices").innerHTML = json_obj.mid
+
+
+	var ob1 = document.getElementById("thread").style.display="block";
+}
+
+function goback(){
+	var ob = document.getElementById("land").style.display="none";
+	var ob1 = document.getElementById("camps").style.display="none";
+	var ob1 = document.getElementById("messages").style.display="block";
+	var ob1 = document.getElementById("thread").style.display="none";
+}
 
 
 (function(document) {

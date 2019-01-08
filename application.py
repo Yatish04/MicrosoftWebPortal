@@ -1,8 +1,14 @@
 from flask import *
 import pymongo
 from bson import ObjectId
-
+from datetime import datetime
+from ast import literal_eval
+import random
 app = Flask(__name__,template_folder=".")
+
+uri = "mongodb://yatishhr:skv5d9yiRMuHeS0ft5aYipjLAErgy0KEg5iacaWTWUW5JwdskJAlXVYZagWJfWD46ZILskdyxDWhtH2YXl7YdA==@yatishhr.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
+client = pymongo.MongoClient(uri)
+db = client.Azure
 
 @app.route("/",methods=["GET"])
 @app.route("/home",methods=["GET"])
@@ -23,12 +29,7 @@ def renderrelief():
 
 @app.route('/ngo/resources',methods=['GET'])
 def resources():
-
-    # if "E-mail" not in session:
-    #     return json.dumps({"status":500})
-    uri = "mongodb://yatishhr:pXYRVwZL2myXglrdgLSwAVKUb5U8AnbN1m83JXogbpKXlmwBBOdk4Py6s7EgBGsJoWRvTFJ6o7nNDY1n99HHMw==@yatishhr.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
-    client = pymongo.MongoClient(uri)
-    db = client.Azure
+    
     donate = db.resources
     res=""
     donated = donate.find()
@@ -46,23 +47,17 @@ def resources():
 
 @app.route('/ngo/myresources',methods=["GET"])
 def get_db():
-    uri = "mongodb://yatishhr:pXYRVwZL2myXglrdgLSwAVKUb5U8AnbN1m83JXogbpKXlmwBBOdk4Py6s7EgBGsJoWRvTFJ6o7nNDY1n99HHMw==@yatishhr.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
-    client = pymongo.MongoClient(uri)
-    db = client.Azure
     ref = db.ngo_data
-    curr = ref.find_one({"_id":"0"})
+    curr = ref.find_one({"_id":ObjectId("5c3349625c19950d9b9c2de3")})
     res={}
-    res["data"] = curr["myresources"]
+    res["data"] = literal_eval(curr["myresources"])
     return json.dumps(res)
 
 @app.route('/ngo/myresources/update', methods=["POST"])
 def updateones():
-    uri = "mongodb://yatishhr:pXYRVwZL2myXglrdgLSwAVKUb5U8AnbN1m83JXogbpKXlmwBBOdk4Py6s7EgBGsJoWRvTFJ6o7nNDY1n99HHMw==@yatishhr.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
-    client = pymongo.MongoClient(uri)
-    db = client.Azure
     ref = db.ngo_data
     req = request.get_json()
-    curr = ref.find_one({"_id":"0"})
+    curr = ref.find_one({"_id":ObjectId("5c3349625c19950d9b9c2de3")})
     temp={}
     keys = req["name"]+'('+req["type"]+')'
     temp[keys] = req["qty"]
@@ -76,13 +71,9 @@ def updateones():
 
 @app.route('/ngo/myresources/delete', methods=["POST"])
 def deleteones():
-    uri = "mongodb://yatishhr:pXYRVwZL2myXglrdgLSwAVKUb5U8AnbN1m83JXogbpKXlmwBBOdk4Py6s7EgBGsJoWRvTFJ6o7nNDY1n99HHMw==@yatishhr.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
-    client = pymongo.MongoClient(uri)
-    db = client.Azure
-    ref = db.ngo_data
     ref = db.ngo_data
     req = request.get_json()
-    curr = ref.find_one({"_id":"0"})
+    curr = ref.find_one({"_id":ObjectId("5c3349625c19950d9b9c2de3")})
     temp={}
     keys = req["name"]+'('+req["type"]+')'
     temp[keys] = req["qty"]
@@ -98,13 +89,109 @@ def deleteones():
 
 @app.route('/relief/<disaster_id>/getassets',methods=["GET"])
 def getassets(disaster_id):
-    uri = "mongodb://yatishhr:pXYRVwZL2myXglrdgLSwAVKUb5U8AnbN1m83JXogbpKXlmwBBOdk4Py6s7EgBGsJoWRvTFJ6o7nNDY1n99HHMw==@yatishhr.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
-    client = pymongo.MongoClient(uri)
-    db = client.Azure
     ref = db.Victim
     cursor = ref.find_one({"user_id":"0","Disasterid":disaster_id})
     res={}
     res["src"] = cursor["facial"]
-    res["analytics"]=cursor["victims"]
+    temp=literal_eval(cursor["victims"])
+    res["males"]=temp["males"]
+    res["children"]=temp["children"]
+    res["elders"]=temp["elders"]
+    res["female"]=temp["female"]
     res["status"] = 200
     return json.dumps(res)
+
+@app.route('/message/pipeline/gettopic',methods=["GET"])
+def get_topics():
+    d=db.ngo_data.find_one({'intent':'message_passing'})
+    d=d['body']
+    k=1
+    res=""
+    # '''
+    # <tr class="unread" onclick="showthread()">
+    #                 <td class="inbox-small-cells">
+    #                 </td>
+    #                 <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
+    #                 <td class="view-message  dont-show">PHPClass</td>
+    #                 <td class="view-message ">Added a new class: Login Class Fast Site</td>
+    #                 <td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
+    #                 <td class="view-message  text-right">9:27 AM</td>
+    #               </tr>
+    # '''
+    for i in d:
+        res=res+"<tr class='unread' onclick='showthread("+str(i["mid"])+")'>"
+        res=res+"<td class='inbox-small-cells' style='width:10px;'> </td> <td class='inbox-small-cells' style='width:10px;'><i class='fa fa-star'></i></td>"
+        res=res+"<td class='view-message  dont-show'>"+i["reliefcampname"]+"</td>"
+        res=res+"<td class='view-message'>"+i["topic_name"]+"</td>"
+        res=res+"<td class='view-message  inbox-small-cells'><i class='fa fa-paperclip'></i></td>"
+        res = res+"<td class='view-message  text-right'>"+str(i["timestamp"])+"</td> </tr>"
+
+    return json.dumps({"status":200,"data":res})
+
+@app.route('/messages/pipeline/createtopic',methods=["POST"])
+def create_topic():
+    js=request.get_json()
+    topic=js["topic"]
+    relif=js["relief"]
+    message=js["message"]
+    d=db.Victim.find_one({'intent':'message_passing'})
+    temp={"topic_name":topic,"timestamp":datetime.now().strftime("%d %b"),"reliefcampname":relif,"mid":str(len(d["body"])+1),"status":"true","threads":[relif+':'+message]}
+    d["body"].append(temp)
+    db.ngo_data.update_one({"intent":"message_passing","_id":ObjectId("5c34292d1b4ebb4818cc6a7c")},{"$set":d},upsert=False)
+    return json.dumps({"status":200})
+
+@app.route('/messages/pipeline/getthread/<mid>')
+def get_thread(mid):
+    d=db.ngo_data.find_one({'intent':'message_passing'})
+    # import pdb; pdb.set_trace()
+    mid=int(mid)
+    t=d['body'][mid-1]["threads"]
+    ''' message split '''
+    res=""
+    cols=["#555af3","#59e955","#f6ea32","#f63232","f529df"]
+    cols=random.sample(cols,2)
+    col1=cols[0]
+    col2=cols[1]
+    f1=True
+    f2=False
+    '''
+    <hr>
+          <p><strong style="color:#f4511e"> User1:</strong> need so many stuffs!!</p>
+    
+    '''
+    for i in t:
+        l=i.split(':')
+        u=l[0]
+        m=l[1]
+        if f1:
+            res=res+ "<p><hr><strong style='color:"+col1+"'>"+u+":</strong> "+m+"</p>"
+            f1=False
+            f2=True
+            continue
+        if f2:
+            res=res+ "<p><hr><strong style='color:"+col2+"'>"+u+":</strong> "+m+"</p>"
+            f2=False
+            f1=True
+    return json.dumps({"status":200,"data":res,"topic":d["body"][mid-1]["topic_name"],"mid":mid})
+
+@app.route('/messages/pipeline/<mid>/updatethread',methods=["POST"])
+def update_thread(mid):
+    js=request.get_json()
+    mid=int(mid)
+    d=db.ngo_data.find_one({'intent':'message_passing'})
+    t=d['body'][mid-1]
+    u=js["user"]
+    m=js["message"]
+    t["threads"].append(u+':'+m)
+    d['body'][mid-1]=t
+    db.ngo_data.update_one({"intent":"message_passing","_id":ObjectId("5c34292d1b4ebb4818cc6a7c")},{"$set":d},upsert=False)
+
+    return json.dumps({"status":200})
+
+
+
+@app.route('/messages/pipeline/update/status')
+def update_status():
+    js=request.get_json()
+
+    return json.dumps({"status":200})

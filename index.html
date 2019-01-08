@@ -19,7 +19,9 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: rgb(3, 78, 190);
+    background-color: rgb(0, 0, 0);
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 li {
@@ -40,7 +42,7 @@ li a {
 }
 
 li a:hover:not(.active) {
-    background-color: #111;
+    background-color: rgb(94, 94, 102);
 }
 
 .active {
@@ -67,7 +69,7 @@ li a:hover:not(.active) {
 
     function rescue()
     {
-        var ob1 = document.getElementById("weather").style.display="none";
+        var ob1 = document.getElementById("weather").style.display="whinone";
         var ob2 = document.getElementById("ngo").style.display="none";
         var ob3 = document.getElementById("rescue").style.display="block";
     }
@@ -82,13 +84,13 @@ li a:hover:not(.active) {
   <!-- particles.js container -->
    <div id="particles-js"></div>
    <ul style="position:relative ; opacity: 0.8;">
-        <li><a class="active"  onclick="ngo()">Login as Ngo</a></li>
-        <li><a  onclick="weather()">Login as Weather Agency</a></li>
-        <li><a  onclick="rescue()">Login as Rescue Agency</a></li>
+        <li><a class="active"  onclick="ngo()" style="text-decoration:none;" ><strong>Login as Ngo </strong> </a></li>
+        <li><a  onclick="weather() " style="text-decoration:none;"><strong>Login as Weather Agency</strong></a></li>
+        <li><a  onclick="rescue()" style="text-decoration:none;"><strong>Login as Rescue Agency</strong></a></li>
       </ul>
     <div id="ngo" style="position: absolute;top: 30%;left: 30%; display: block;">
 
-            <div style="color: white;width: 350px;position: relative;left: 30%; top: 30%;">
+            <div style="color: white;width: 350px;position: relative;left: 30%; top: 30%;box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4), 0 6px 20px 0 rgba(0,0,0,0.19);">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <h3 style="color: black;left: 29%;position: relative;">Ngo Login</h3>
