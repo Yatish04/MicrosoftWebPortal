@@ -4,7 +4,7 @@ function myResources(){
 	var ob = document.getElementById("land").style.display="none";
 	var ob1 = document.getElementById("camps").style.display="none";
 	var ob1 = document.getElementById("messages").style.display="none";
-	
+	var ob1 = document.getElementById("thread").style.display="none";
 	var json_obj = JSON.parse(Get("https://rvngo.azurewebsites.net/ngo/myresources"));
 	console.log("this is the author name: "+json_obj.data);
 	var temp = json_obj.data;
