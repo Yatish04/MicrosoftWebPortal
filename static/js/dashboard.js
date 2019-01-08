@@ -150,7 +150,7 @@ function dashhome(){
 	var ob = document.getElementById("land").style.display="block";
 	var ob1 = document.getElementById("camps").style.display="none";
 	var ob1 = document.getElementById("messages").style.display="none";
-
+	var ob1 = document.getElementById("thread").style.display="none";
 }
 
 
