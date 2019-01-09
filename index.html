@@ -55,6 +55,9 @@ li a:hover:not(.active) {
 
     function ngo()
     {
+        var l=document.getElementById("ngo1").className="active";
+  var l=document.getElementById("rescue1").className="";
+  var l=document.getElementById("weather1").className="";
         var ob1 = document.getElementById("weather").style.display="none";
         var ob2 = document.getElementById("ngo").style.display="block";
         var ob3 = document.getElementById("rescue").style.display="none";
@@ -62,6 +65,9 @@ li a:hover:not(.active) {
 
     function weather()
     {
+        var l=document.getElementById("ngo1").className="";
+  var l=document.getElementById("rescue1").className="";
+  var l=document.getElementById("weather1").className="active";
         var ob1 = document.getElementById("weather").style.display="block";
         var ob2 = document.getElementById("ngo").style.display="none";
         var ob3 = document.getElementById("rescue").style.display="none";
@@ -69,6 +75,9 @@ li a:hover:not(.active) {
 
     function rescue()
     {
+        var l=document.getElementById("ngo1").className="";
+  var l=document.getElementById("rescue1").className="active";
+  var l=document.getElementById("weather1").className="";
         var ob1 = document.getElementById("weather").style.display="whinone";
         var ob2 = document.getElementById("ngo").style.display="none";
         var ob3 = document.getElementById("rescue").style.display="block";
@@ -84,9 +93,9 @@ li a:hover:not(.active) {
   <!-- particles.js container -->
    <div id="particles-js"></div>
    <ul style="position:relative ; opacity: 0.8;">
-        <li><a class="active"  onclick="ngo()" style="text-decoration:none;" ><strong>Login as Ngo </strong> </a></li>
-        <li><a  onclick="weather() " style="text-decoration:none;"><strong>Login as Weather Agency</strong></a></li>
-        <li><a  onclick="rescue()" style="text-decoration:none;"><strong>Login as Rescue Agency</strong></a></li>
+        <li><a class="active" id="ngo1"  onclick="ngo()" style="text-decoration:none;" ><strong>Login as Ngo </strong> </a></li>
+        <li><a  onclick="weather()" id="weather1"  style="text-decoration:none;"><strong>Login as Weather Agency</strong></a></li>
+        <li><a  onclick="rescue()" id="rescue1" style="text-decoration:none;"><strong>Login as Rescue Agency</strong></a></li>
       </ul>
     <div id="ngo" style="position: absolute;top: 30%;left: 30%; display: block;">
 
