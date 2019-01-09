@@ -5,6 +5,7 @@ function myResources(){
 	var ob1 = document.getElementById("camps").style.display="none";
 	var ob1 = document.getElementById("messages").style.display="none";
 	var ob1 = document.getElementById("thread").style.display="none";
+	var ob1 = document.getElementById("main").innerHTML="My Inventory";
 	var json_obj = JSON.parse(Get("https://rvngo.azurewebsites.net/ngo/myresources"));
 	console.log("this is the author name: "+json_obj.data);
 	var temp = json_obj.data;
@@ -137,7 +138,7 @@ function Get(yourUrl){
 
 window.onload = function()
 {
-
+	var ob1 = document.getElementById("main").innerHTML="My Requests";
 	var json_obj = JSON.parse(Get("https://rvngo.azurewebsites.net/ngo/resources"));
 	
 	console.log("this is the author name: "+json_obj.data);
@@ -147,6 +148,7 @@ window.onload = function()
 }
 
 function dashhome(){
+	var ob1 = document.getElementById("main").innerHTML="My Requests";
 	var ob = document.getElementById("land").style.display="block";
 	var ob1 = document.getElementById("camps").style.display="none";
 	var ob1 = document.getElementById("messages").style.display="none";
@@ -155,6 +157,9 @@ function dashhome(){
 
 
 function dashmessages(){
+	var loader1 = document.getElementById("loader");
+	loader1.style.display="block";
+	var ob1 = document.getElementById("main").innerHTML="My Messages";
 	var ob = document.getElementById("land").style.display="none";
 	var ob1 = document.getElementById("camps").style.display="none";
 	
@@ -168,7 +173,7 @@ function dashmessages(){
 	var ob1 = document.getElementById("thread").style.display="none";
 
 
-
+	loader1.style.display="none";
 
 
 }
@@ -176,7 +181,7 @@ function dashmessages(){
 
 
 function reply(){
-
+	var ob1 = document.getElementById("main").innerHTML="My Messages";
 	var text=document.getElementById("reply").value;
 	var js1={"message":text.toString(),"user":"Ngo1"};
 	var mid=document.getElementById("indices").innerHTML;
@@ -210,10 +215,13 @@ request.send(JSON.stringify(js1));
 
 function showthread(ele){
 	console.log(ele);
+	var loader1 = document.getElementById("loader");
+	loader1.style.display="block";
+
 	var ob = document.getElementById("land").style.display="none";
 	var ob1 = document.getElementById("camps").style.display="none";
 	var ob1 = document.getElementById("messages").style.display="none";
-
+	var ob1 = document.getElementById("main").innerHTML="My Messages";
 	var json_obj = JSON.parse(Get("https://rvngo.azurewebsites.net/messages/pipeline/getthread/"+ele.toString()));
 	
 	
@@ -223,6 +231,7 @@ function showthread(ele){
 
 
 	var ob1 = document.getElementById("thread").style.display="block";
+	loader1.style.display="none";
 }
 
 function goback(){
