@@ -152,26 +152,33 @@ def get_thread(mid):
     cols=random.sample(cols,2)
     col1=cols[0]
     col2=cols[1]
-    f1=True
+    f1=False
     f2=False
     '''
     <hr>
           <p><strong style="color:#f4511e"> User1:</strong> need so many stuffs!!</p>
     
     '''
+    dicts={}
     for i in t:
         l=i.split(':')
         u=l[0]
         m=l[1]
-        if f1:
-            res=res+ "<p><hr><strong style='color:"+col1+"'>"+u+":</strong> "+m+"</p>"
-            f1=False
-            f2=True
-            continue
-        if f2:
-            res=res+ "<p><hr><strong style='color:"+col2+"'>"+u+":</strong> "+m+"</p>"
-            f2=False
-            f1=True
+        try:
+            col = dicts[u]
+            res=res+ "<p><hr><strong style='color:"+col+"'>"+u+":</strong> "+m+"</p>"
+        except:
+            if not f1:
+                res=res+ "<p><hr><strong style='color:"+col1+"'>"+u+":</strong> "+m+"</p>"
+                dicts[u]=col1
+                f1=True 
+                continue
+            if not f2:
+                res=res+ "<p><hr><strong style='color:"+col2+"'>"+u+":</strong> "+m+"</p>"
+                dicts[u]=col2
+                f2=True
+                f1=False 
+
     return json.dumps({"status":200,"data":res,"topic":d["body"][mid-1]["topic_name"],"mid":mid})
 
 @app.route('/messages/pipeline/<mid>/updatethread',methods=["POST"])
