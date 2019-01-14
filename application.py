@@ -244,7 +244,7 @@ def update_rescued():
                         rescued.append([j['name'],urls])
     rescued=rescued+d['rescued']
     d['rescued']=rescued
-    db.ngo_data.update_one({"intent":"safe","_id":ObjectId("5c3b5389d59b290b704c4012")},{"$set":d},upsert=False)
+    db.ngo_data.update_one({"type":"safe","_id":ObjectId("5c3b5389d59b290b704c4012")},{"$set":d},upsert=False)
     return json.dumps({'status':200})
 
     

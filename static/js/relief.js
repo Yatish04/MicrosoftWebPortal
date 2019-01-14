@@ -30,13 +30,15 @@ function dashmessages(){
 	var ob = document.getElementById("faces").style.display="none";
 	var ob1 = document.getElementById("forms").style.display="none";
 	document.getElementById('image_upload').style.display="none";
+	var loader1 = document.getElementById("loader");
+	loader1.style.display="block"; 
 	var json_obj = JSON.parse(Get("https://rvngo.azurewebsites.net/message/pipeline/gettopic"));
 	
 	
 	var doms = document.getElementById("message-replacer").innerHTML = json_obj.data
 	// console.log(json_obj.data);
 	var ob1 = document.getElementById("messages").style.display="block";
-
+	loader1.style.display="none"; 
 	var ob1 = document.getElementById("thread").style.display="none";
 }
 
@@ -76,6 +78,7 @@ function showthread(ele){
 	var ob1 = document.getElementById("forms").style.display="none";
 	var ob1 = document.getElementById("messages").style.display="none";
 
+
 	var json_obj = JSON.parse(Get("https://rvngo.azurewebsites.net/messages/pipeline/getthread/"+ele.toString()));
 	
 	
@@ -112,7 +115,8 @@ function upload_asynch(){
 	console.log(posurl);
 	console.log(imgfile);
 
-
+	var loader1 = document.getElementById("loader");
+	loader1.style.display="block"; 
 	 fr.onload=function()
 	{
 		byteresult=fr.result;
@@ -137,17 +141,8 @@ function upload_asynch(){
 		
 	};
 
+	loader1.style.display="none"; 
 fr.readAsArrayBuffer(imgfile);
-
-
-
-
-
-
-
-
-
-
 
 }
 
