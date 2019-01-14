@@ -214,6 +214,9 @@ def update_rescued():
     d=db.ngo_data.find_one({'intent':'safe'})
     headers={"Content-Type":"application/octet-stream"}
     headers["Ocp-Apim-Subscription-Key"]="501f22c3797048d2a73ae58a83ea9069"
+    BASE_URL="https://australiaeast.api.cognitive.microsoft.com/face/v1.0/"
+    cf.BaseUrl.set(BASE_URL)
+    cf.Key.set("501f22c3797048d2a73ae58a83ea9069")
     binurl="https://australiaeast.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false"
     res=requests.post(url=binurl,headers=headers,data=data)
     js=json.loads(res.text)
