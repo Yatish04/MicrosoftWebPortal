@@ -211,7 +211,7 @@ def update_status():
 def update_rescued():
     data=request.data
     PERSON_GROUP_ID="victims"
-    d=db.ngo_data.find_one({'intent':'safe'})
+    d=db.ngo_data.find_one({'type':'safe'})
     headers={"Content-Type":"application/octet-stream"}
     headers["Ocp-Apim-Subscription-Key"]="501f22c3797048d2a73ae58a83ea9069"
     BASE_URL="https://australiaeast.api.cognitive.microsoft.com/face/v1.0/"
