@@ -1,9 +1,13 @@
 from flask import *
 import pymongo
+import requests
 from bson import ObjectId
 from datetime import datetime
 from ast import literal_eval
 import random
+import cognitive_face as cf
+from azure.storage.blob import BlockBlobService, PublicAccess
+
 app = Flask(__name__,template_folder=".")
 
 uri = "mongodb://yatishhr:skv5d9yiRMuHeS0ft5aYipjLAErgy0KEg5iacaWTWUW5JwdskJAlXVYZagWJfWD46ZILskdyxDWhtH2YXl7YdA==@yatishhr.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
@@ -202,3 +206,38 @@ def update_status():
     js=request.get_json()
 
     return json.dumps({"status":200})
+
+@app.route('/update/rescued/cognitive',methods=['POST'])
+def update_rescued():
+    data=request.data
+    PERSON_GROUP_ID="victim"
+    d=db.ngo_data.find_one({'intent':'safe'})
+    headers={"Content-Type":"application/octet-stream"}
+    headers["Ocp-Apim-Subscription-Key"]="501f22c3797048d2a73ae58a83ea9069"
+    binurl="https://australiaeast.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false"
+    res=requests.post(url=binurl,headers=headers,data=data)
+    js=json.loads(res.text)
+    face_ids = [d['faceId'] for d in js]
+    identified_faces = cf.face.identify(face_ids, PERSON_GROUP_ID)
+    person_list=cf.person.lists(PERSON_GROUP_ID)
+    uid=len(d['rescued'])+1
+    # cursor["facial"] = "https://rvsafeimages.blob.core.windows.net/imagescontainer/"+uid+'.'+format_
+    # ref.update_one({"user_id":user_id,"Disasterid":str(cursor["Disasterid"])},{"$set":cursor},upsert=False)
+    
+    block_blob_service = BlockBlobService(account_name='rvsafeimages', account_key='391TMmlvDdRWu+AsNX+ZMl1i233YQfP5dxo/xhMrPm22KtwWwwMmM9vFAJpJHrGXyBrTW4OoAInjHnby9Couug==')
+    container_name ='imagescontainer'
+    block_blob_service.create_blob_from_bytes(container_name,'safevictims'+uid+"."+'jpg',data)
+    #save to blob
+    urls="https://rvsafeimages.blob.core.windows.net/imagescontainer/safevictims"+uid+'.'+'jpg'
+    rescued=[]
+    for i in identified_faces['candidates']:
+        if 'personId' in i:
+            for j in person_list:
+                if j['personId']==i['personId']:
+                    rescued.append(j['name'],urls)
+    rescued=rescued+d['rescued']
+    d['rescued']=rescued
+    db.ngo_data.update_one({"intent":"safe","_id":ObjectId("5c3b5389d59b290b704c4012")},{"$set":d},upsert=False)
+    return json.dumps({'status':200})
+
+    

@@ -21,8 +21,9 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/mail.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/back.css') }}">
-
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/upload.css') }}">
     <script   src= "{{ url_for('static',filename='js/relief.js') }}"> </script>
+    <script   src= "{{ url_for('static',filename='js/upload.js') }}"> </script>
     <!-- Custom styles for this template -->
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/index.css') }}">
   <style>
@@ -193,6 +194,7 @@ li a {
             <li style="color:white"><a onclick="faceanalytics()" style="color:white !important;text-decoration: none;">Analytics</a></li>
             <li style="color:white"><a onclick="dashmessages()" style="color:white !important;text-decoration: none;">Messages</a></li>
             <li style="color:white"><a onclick="alertnew()" style="color:white !important;text-decoration: none;">Alert</a></li>
+            <li style="color:white"><a onclick="upload()" style="color:white !important;text-decoration: none;">Upload</a></li>
             
 
           </ul>
@@ -274,7 +276,27 @@ li a {
           </div>
         </div>
 
+        <div class="image_upload" id="image_upload" style="position: absolute; width:96%;display: none;">
+          <div class="file-upload">
+            <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
+          
+            <div class="image-upload-wrap">
+              <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+              <div class="drag-text">
+                <h3>Drag and drop a file or select add Image</h3>
+              </div>
+            </div>
+            <div class="file-upload-content">
+              <img class="file-upload-image" src="#" alt="your image" />
+              <div class="image-title-wrap">
+                <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+              </div>
+            </div>
+          </div>
+            
 
+
+        </div>
 
         <div class="thread" id="thread" style="position: absolute; width:96%;display: none;">
             <section class="thread-container">

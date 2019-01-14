@@ -9,7 +9,9 @@ function faceanalytics(){
     document.getElementById('forms').style.display="none";
     document.getElementById('faces').style.display="";
     document.getElementById('messages').style.display="none";
-    document.getElementById('thread').style.display="none";
+	document.getElementById('thread').style.display="none";
+	document.getElementById('image_upload').style.display="none";
+
 }
 
 
@@ -19,6 +21,7 @@ function alertnew(){
     document.getElementById('faces').style.display="none";
     document.getElementById('messages').style.display="none";
     document.getElementById('thread').style.display="none";
+	document.getElementById('image_upload').style.display="none";
 
 }
 
@@ -26,7 +29,7 @@ function alertnew(){
 function dashmessages(){
 	var ob = document.getElementById("faces").style.display="none";
 	var ob1 = document.getElementById("forms").style.display="none";
-	
+	document.getElementById('image_upload').style.display="none";
 	var json_obj = JSON.parse(Get("https://rvngo.azurewebsites.net/message/pipeline/gettopic"));
 	
 	
@@ -43,6 +46,7 @@ function reply(){
 	var js1={"message":text.toString(),"user":"Relief1"};
 	var mid=document.getElementById("indices").innerHTML;
 	document.getElementById("reply").value="";
+	document.getElementById('image_upload').style.display="none";
 
 	console.log(mid);
 	var request=new XMLHttpRequest();
@@ -79,6 +83,7 @@ function showthread(ele){
 	var doms = document.getElementById("topicname").innerHTML = json_obj.topic
 	var doms = document.getElementById("indices").innerHTML = json_obj.mid
 
+	document.getElementById('image_upload').style.display="none";
 
 	var ob1 = document.getElementById("thread").style.display="block";
 }
@@ -86,6 +91,18 @@ function showthread(ele){
 function goback(){
 	var ob1 = document.getElementById("messages").style.display="block";
 	var ob1 = document.getElementById("thread").style.display="none";
+}
+
+function upload(){
+	document.getElementById('forms').style.display="none";
+    document.getElementById('faces').style.display="none";
+    document.getElementById('messages').style.display="none";
+	document.getElementById('thread').style.display="none";
+	document.getElementById('image_upload').style.display="block";
+}
+
+function upload_asynch(){
+
 }
 
 (function(document) {
