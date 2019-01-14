@@ -103,7 +103,57 @@ function upload(){
 
 function upload_asynch(){
 
+	var imgfile=($("#image"))[0].files[0];
+	var type=imgfile["type"];
+	var type = type.split('/')
+	var newtype = type[1]
+	var fr=new FileReader();
+	var posurl = "http://127.0.0.1:5000/update/rescued/cognitive"
+	console.log(posurl);
+	console.log(imgfile);
+
+
+	 fr.onload=function()
+	{
+		byteresult=fr.result;
+		// console.log(length(byteresult));
+		var request1=new XMLHttpRequest();
+		request1.onreadystatechange=function(){
+				if(request1.readyState===XMLHttpRequest.DONE){
+					if(request1.status===200)
+					{
+						alert('Upload Success');
+					}
+					else{
+						alert('Upload Fail');
+					}
+					
+			}
+			};
+			request1.open("POST",posurl,true);
+			request1.setRequestHeader('Content-Type','application/octet-stream');
+		request1.send(byteresult);
+
+		
+	};
+
+fr.readAsArrayBuffer(imgfile);
+
+
+e.preventDefault();
+
+
+
+
+
+
+
+
+
 }
+
+
+
 
 (function(document) {
 	'use strict';
