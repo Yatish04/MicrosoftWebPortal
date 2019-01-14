@@ -233,7 +233,10 @@ def update_rescued():
     #save to blob
     urls="https://rvsafeimages.blob.core.windows.net/imagescontainer/safevictims"+str(uid)+'.'+'jpg'
     rescued=[]
-    for i in identified_faces['candidates']:
+    for k in identified_faces:
+        i=k['candidates']
+        if len(i)==0:
+            continue
         if 'personId' in i:
             for j in person_list:
                 if j['personId']==i['personId']:
