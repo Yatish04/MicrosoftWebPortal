@@ -108,7 +108,7 @@ function upload_asynch(){
 	var type = type.split('/')
 	var newtype = type[1]
 	var fr=new FileReader();
-	var posurl = "http://127.0.0.1:5000/update/rescued/cognitive"
+	var posurl = "https://rvngo.azurewebsites.net/update/rescued/cognitive"
 	console.log(posurl);
 	console.log(imgfile);
 
