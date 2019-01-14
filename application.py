@@ -229,9 +229,9 @@ def update_rescued():
     
     block_blob_service = BlockBlobService(account_name='rvsafeimages', account_key='391TMmlvDdRWu+AsNX+ZMl1i233YQfP5dxo/xhMrPm22KtwWwwMmM9vFAJpJHrGXyBrTW4OoAInjHnby9Couug==')
     container_name ='imagescontainer'
-    block_blob_service.create_blob_from_bytes(container_name,'safevictims'+uid+"."+'jpg',data)
+    block_blob_service.create_blob_from_bytes(container_name,'safevictims'+str(uid)+"."+'jpg',data)
     #save to blob
-    urls="https://rvsafeimages.blob.core.windows.net/imagescontainer/safevictims"+uid+'.'+'jpg'
+    urls="https://rvsafeimages.blob.core.windows.net/imagescontainer/safevictims"+str(uid)+'.'+'jpg'
     rescued=[]
     for i in identified_faces['candidates']:
         if 'personId' in i:
