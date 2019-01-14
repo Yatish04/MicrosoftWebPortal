@@ -140,7 +140,6 @@ function upload_asynch(){
 fr.readAsArrayBuffer(imgfile);
 
 
-e.preventDefault();
 
 
 
