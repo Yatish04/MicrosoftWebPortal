@@ -237,10 +237,11 @@ def update_rescued():
         i=k['candidates']
         if len(i)==0:
             continue
-        if 'personId' in i:
-            for j in person_list:
-                if j['personId']==i['personId']:
-                    rescued.append(j['name'],urls)
+        for t in i:
+            if 'personId' in t:
+                for j in person_list:
+                    if j['personId']==t['personId']:
+                        rescued.append(j['name'],urls)
     rescued=rescued+d['rescued']
     d['rescued']=rescued
     db.ngo_data.update_one({"intent":"safe","_id":ObjectId("5c3b5389d59b290b704c4012")},{"$set":d},upsert=False)
