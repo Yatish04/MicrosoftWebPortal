@@ -210,7 +210,7 @@ def update_status():
 @app.route('/update/rescued/cognitive',methods=['POST'])
 def update_rescued():
     data=request.data
-    PERSON_GROUP_ID="victim"
+    PERSON_GROUP_ID="victims"
     d=db.ngo_data.find_one({'intent':'safe'})
     headers={"Content-Type":"application/octet-stream"}
     headers["Ocp-Apim-Subscription-Key"]="501f22c3797048d2a73ae58a83ea9069"
