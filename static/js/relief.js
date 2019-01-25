@@ -128,6 +128,7 @@ function upload(){
     document.getElementById('messages').style.display="none";
 	document.getElementById('thread').style.display="none";
 	document.getElementById('image_upload').style.display="block";
+	relief()
 }
 
 function upload_asynch(){
