@@ -172,16 +172,16 @@ def get_thread(mid):
         m=l[1]
         try:
             col,class_ = dicts[u]
-            res=res+ "<div class='"+class_+"'><p><strong style='color:"+col+"'>"+u+":</strong> "+m+"</p></div><br/>"
+            res=res+ "<div class='"+class_+"'><p><strong style='color:"+col+"'>"+u+":</strong> "+m+"</p></div><br>"
         except:
             if not f1:
-                res=res+ "<div class='"+class1+"'><p><strong style='color:"+col1+"'>"+u+":</strong> "+m+"</p></div><br/>"
+                res=res+ "<div class='"+class1+"'><p><strong style='color:"+col1+"'>"+u+":</strong> "+m+"</p></div><br>"
                
                 dicts[u]=(col1,class1)
                 f1=True 
                 continue
             if not f2:
-                res=res+ "<div class='"+class2+"'><p><strong style='color:"+col2+"'>"+u+":</strong> "+m+"</p></div><br/>"
+                res=res+ "<div class='"+class2+"'><p><strong style='color:"+col2+"'>"+u+":</strong> "+m+"</p></div><br>"
 
                 dicts[u]=(col2,class2)
                 f2=True
