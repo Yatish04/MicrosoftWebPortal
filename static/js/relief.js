@@ -15,6 +15,13 @@ function faceanalytics(){
 }
 
 
+function relief(){
+	var json_obj = JSON.parse(Get("https://rvngo.azurewebsites.net/group/images"));
+	res=""
+	document.getElementById("reliefgroups").innerHTML=res;
+}
+
+
 
 function alertnew(){
     document.getElementById('forms').style.display="block";
