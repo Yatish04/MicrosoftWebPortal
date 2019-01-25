@@ -18,6 +18,25 @@ function faceanalytics(){
 function relief(){
 	var json_obj = JSON.parse(Get("https://rvngo.azurewebsites.net/group/images"));
 	res=""
+
+	static1="<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4' > <div class='card' style='width:85%'> <img class='card-img-top' src='"
+	
+	static2="'alt='Card image' style='height:40vh'> <div class='card-body'> </div> </div> </div> "
+	/*
+	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" >
+              <div class="card" style="width:85%">
+                <img class="card-img-top" src="{{ url_for('static',filename='images/default1.jpeg') }}" alt="Card image" style="height:40vh">
+                <div class="card-body">
+                  
+                </div>
+              </div>
+            </div>
+*/
+	arr=json_obj['urls']
+	for( var j=0;j<arr.length;j++){
+		res=res+static1+arr[j]+static2
+
+	}
 	document.getElementById("reliefgroups").innerHTML=res;
 }
 
