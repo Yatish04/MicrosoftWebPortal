@@ -151,7 +151,7 @@ def get_thread(mid):
     mid=int(mid)
     t=d['body'][mid-1]["threads"]
     ''' message split '''
-    res=""
+    res="<br><hr>"
     cols=["#555af3","#59e955","#f6ea32","#f63232","f529df"]
     class1="bubble me"
     class2="bubble you"
