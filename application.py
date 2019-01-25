@@ -153,6 +153,8 @@ def get_thread(mid):
     ''' message split '''
     res=""
     cols=["#555af3","#59e955","#f6ea32","#f63232","f529df"]
+    class1="bubble me"
+    class2="bubble you"
     cols=random.sample(cols,2)
     col1=cols[0]
     col2=cols[1]
@@ -169,17 +171,19 @@ def get_thread(mid):
         u=l[0]
         m=l[1]
         try:
-            col = dicts[u]
-            res=res+ "<p><hr><strong style='color:"+col+"'>"+u+":</strong> "+m+"</p>"
+            col,class_ = dicts[u]
+            res=res+ "<div class="+class_+"><p><hr><strong style='color:"+col+"'>"+u+":</strong> "+m+"</p></div>"
         except:
             if not f1:
-                res=res+ "<p><hr><strong style='color:"+col1+"'>"+u+":</strong> "+m+"</p>"
-                dicts[u]=col1
+                res=res+ "<div class="+class1+"><p><hr><strong style='color:"+col1+"'>"+u+":</strong> "+m+"</p></div>"
+               
+                dicts[u]=(col1,class1)
                 f1=True 
                 continue
             if not f2:
-                res=res+ "<p><hr><strong style='color:"+col2+"'>"+u+":</strong> "+m+"</p>"
-                dicts[u]=col2
+                res=res+ "<div class="+class2+"><p><hr><strong style='color:"+col2+"'>"+u+":</strong> "+m+"</p></div>"
+
+                dicts[u]=(col2,class2)
                 f2=True
                 f1=False 
 

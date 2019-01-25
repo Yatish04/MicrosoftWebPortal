@@ -18,7 +18,7 @@ function faceanalytics(){
 function relief(){
 	var json_obj = JSON.parse(Get("https://rvngo.azurewebsites.net/group/images"));
 	res=""
-
+	document.getElementsByClassName('sidenav')[0].style.display="none";
 	static1="<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4' > <div class='card' style='width:85%'> <img class='card-img-top' src='"
 	
 	static2="'alt='Card image' style='height:40vh'> <div class='card-body'> </div> </div> </div> "
@@ -123,12 +123,13 @@ function goback(){
 }
 
 function upload(){
+	relief()
 	document.getElementById('forms').style.display="none";
     document.getElementById('faces').style.display="none";
     document.getElementById('messages').style.display="none";
 	document.getElementById('thread').style.display="none";
 	document.getElementById('image_upload').style.display="block";
-	relief()
+	
 }
 
 function upload_asynch(){
