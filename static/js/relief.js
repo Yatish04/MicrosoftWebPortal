@@ -6,6 +6,8 @@ function Get(yourUrl){
 }
 
 function faceanalytics(){
+	document.getElementsByClassName('sidenav')[0].style.display="block";
+
     document.getElementById('forms').style.display="none";
     document.getElementById('faces').style.display="";
     document.getElementById('messages').style.display="none";
@@ -43,6 +45,8 @@ function relief(){
 
 
 function alertnew(){
+	document.getElementsByClassName('sidenav')[0].style.display="block";
+
     document.getElementById('forms').style.display="block";
     document.getElementById('faces').style.display="none";
     document.getElementById('messages').style.display="none";
@@ -53,6 +57,8 @@ function alertnew(){
 
 
 function dashmessages(){
+	document.getElementsByClassName('sidenav')[0].style.display="block";
+
 	var ob = document.getElementById("faces").style.display="none";
 	var ob1 = document.getElementById("forms").style.display="none";
 	document.getElementById('image_upload').style.display="none";
@@ -100,6 +106,8 @@ request.send(JSON.stringify(js1));
 
 function showthread(ele){
 	console.log(ele);
+	document.getElementsByClassName('sidenav')[0].style.display="block";
+
 	var ob = document.getElementById("faces").style.display="none";
 	var ob1 = document.getElementById("forms").style.display="none";
 	var ob1 = document.getElementById("messages").style.display="none";
