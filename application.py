@@ -44,7 +44,10 @@ def resources():
         res+="<td>"+str(cur["phone_number"])+"</td>"
         res+="<td>"+str(cur["Address"])+"</td>"
         res+="<td>"+str(cur["City"])+"</td>"
-        res+="<td>"+str(cur["items"])+"</td>"
+        temp=""
+        for i in cur["items"]:
+            temps=temps+","+i
+        res+="<td>"+str(temps)+"</td>"
         res+="</tr>"
 
     return json.dumps({"status":200,"data":res})
