@@ -50,7 +50,7 @@ def resources():
                 temps=temps+","+i
         except:
             pass
-        res+="<td>"+str(temps)+"</td>"
+        res+="<td>"+str(temps[1:])+"</td>"
         res+="</tr>"
 
     return json.dumps({"status":200,"data":res})
