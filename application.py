@@ -33,7 +33,7 @@ def renderrelief():
 
 @app.route('/ngo/resources',methods=['GET'])
 def resources():
-    
+    # import pdb; pdb.set_trace()
     donate = db.resources
     res=""
     donated = donate.find()
@@ -45,8 +45,11 @@ def resources():
         res+="<td>"+str(cur["Address"])+"</td>"
         res+="<td>"+str(cur["City"])+"</td>"
         temps=""
-        for i in list(literal_eval(cur["items"])):
-            temps=temps+","+i
+        try:
+            for i in list(literal_eval(cur["items"])):
+                temps=temps+","+i
+        except:
+            pass
         res+="<td>"+str(temps)+"</td>"
         res+="</tr>"
 
