@@ -56,6 +56,35 @@ function alertnew(){
 }
 
 
+function submit_thread(){
+
+	topic=document.getElementById('fname').value;
+    relief=document.getElementById('lname').value;
+	message=document.getElementById('subject').value;
+	js1={"topic":topic,"relief":relief,"message":message}
+	var request=new XMLHttpRequest();
+
+	request.onreadystatechange=function(){
+        if(request.readyState===XMLHttpRequest.DONE){
+            if(request.status===200)
+            {
+                alert('Updated Successfully');
+            }
+            else{
+                alert('Network Error');
+            }
+            
+    }
+    };
+    request.open("POST",'https://rvngo.azurewebsites.net/messages/pipeline/createtopic',true);
+    request.setRequestHeader('Content-Type','application/json');
+request.send(JSON.stringify(js1));
+
+
+
+}
+
+
 function dashmessages(){
 	document.getElementsByClassName('sidenav')[0].style.display="block";
 
