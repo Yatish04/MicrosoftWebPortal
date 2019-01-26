@@ -45,7 +45,7 @@ def resources():
         res+="<td>"+str(cur["Address"])+"</td>"
         res+="<td>"+str(cur["City"])+"</td>"
         temps=""
-        for i in cur["items"]:
+        for i in list(literal_eval(curr["items"])):
             temps=temps+","+i
         res+="<td>"+str(temps)+"</td>"
         res+="</tr>"
