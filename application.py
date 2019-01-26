@@ -44,7 +44,7 @@ def resources():
         res+="<td>"+str(cur["phone_number"])+"</td>"
         res+="<td>"+str(cur["Address"])+"</td>"
         res+="<td>"+str(cur["City"])+"</td>"
-        temp=""
+        temps=""
         for i in cur["items"]:
             temps=temps+","+i
         res+="<td>"+str(temps)+"</td>"
