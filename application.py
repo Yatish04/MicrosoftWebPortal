@@ -151,7 +151,7 @@ def create_topic():
     topic=js["topic"]
     relif=js["relief"]
     message=js["message"]
-    d=db.Victim.find_one({'intent':'message_passing'})
+    d=db.ngo_data.find_one({'intent':'message_passing'})
     temp={"topic_name":topic,"timestamp":datetime.now().strftime("%d %b"),"reliefcampname":relif,"mid":str(len(d["body"])+1),"status":"true","threads":[relif+':'+message]}
     d["body"].append(temp)
     db.ngo_data.update_one({"intent":"message_passing","_id":ObjectId("5c34292d1b4ebb4818cc6a7c")},{"$set":d},upsert=False)
