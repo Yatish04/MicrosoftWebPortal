@@ -227,20 +227,20 @@ def update_status():
 @app.route('/update/rescued/cognitive',methods=['POST'])
 def update_rescued():
     data=request.data
-    PERSON_GROUP_ID="victims"
+    #PERSON_GROUP_ID="victims"
     d=db.ngo_data.find_one({'type':'safe'})
-    headers={"Content-Type":"application/octet-stream"}
-    headers["Ocp-Apim-Subscription-Key"]="501f22c3797048d2a73ae58a83ea9069"
-    BASE_URL="https://australiaeast.api.cognitive.microsoft.com/face/v1.0/"
-    cf.BaseUrl.set(BASE_URL)
-    cf.Key.set("501f22c3797048d2a73ae58a83ea9069")
-    binurl="https://australiaeast.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false"
-    res=requests.post(url=binurl,headers=headers,data=data)
-    js=json.loads(res.text)
-    face_ids = [d['faceId'] for d in js]
-    identified_faces = cf.face.identify(face_ids, PERSON_GROUP_ID)
-    person_list=cf.person.lists(PERSON_GROUP_ID)
-    uid=len(d['rescued'])+1
+    #headers={"Content-Type":"application/octet-stream"}
+    #headers["Ocp-Apim-Subscription-Key"]="501f22c3797048d2a73ae58a83ea9069"
+    #BASE_URL="https://australiaeast.api.cognitive.microsoft.com/face/v1.0/"
+    #cf.BaseUrl.set(BASE_URL)
+    #cf.Key.set("501f22c3797048d2a73ae58a83ea9069")
+    #binurl="https://australiaeast.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false"
+    #res=requests.post(url=binurl,headers=headers,data=data)
+    #js=json.loads(res.text)
+    #face_ids = [d['faceId'] for d in js]
+    #identified_faces = cf.face.identify(face_ids, PERSON_GROUP_ID)
+    #person_list=cf.person.lists(PERSON_GROUP_ID)
+    uid=len(d['rescued_urls'])+1
     # cursor["facial"] = "https://rvsafeimages.blob.core.windows.net/imagescontainer/"+uid+'.'+format_
     # ref.update_one({"user_id":user_id,"Disasterid":str(cursor["Disasterid"])},{"$set":cursor},upsert=False)
     
@@ -254,17 +254,17 @@ def update_rescued():
         d['rescued_urls'].append(urls)
     except:
         d['rescued_urls']=[urls]
-    for k in identified_faces:
-        i=k['candidates']
-        if len(i)==0:
-            continue
-        for t in i:
-            if 'personId' in t:
-                for j in person_list:
-                    if j['personId']==t['personId']:
-                        rescued.append([j['name'],urls])
-    rescued=rescued+d['rescued']
-    d['rescued']=rescued
+    # for k in identified_faces:
+    #     i=k['candidates']
+    #     if len(i)==0:
+    #         continue
+    #     for t in i:
+    #         if 'personId' in t:
+    #             for j in person_list:
+    #                 if j['personId']==t['personId']:
+    #                     rescued.append([j['name'],urls])
+    # rescued=rescued+d['rescued']
+    # d['rescued']=rescued
     db.ngo_data.update_one({"type":"safe","_id":ObjectId("5c3b5389d59b290b704c4012")},{"$set":d},upsert=False)
     return json.dumps({'status':200})
 
