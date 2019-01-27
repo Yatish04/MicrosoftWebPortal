@@ -172,6 +172,7 @@ function upload(){
 function upload_asynch(){
 
 	var imgfile=($("#image"))[0].files[0];
+	
 	var type=imgfile["type"];
 	var type = type.split('/')
 	var newtype = type[1]
@@ -202,6 +203,7 @@ function upload_asynch(){
 			request1.open("POST",posurl,true);
 			request1.setRequestHeader('Content-Type','application/octet-stream');
 		request1.send(byteresult);
+		$("#image").val('');
 
 		
 	};
