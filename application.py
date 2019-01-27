@@ -107,7 +107,10 @@ def getassets(disaster_id):
     cursor = ref.find_one({"user_id":"0","Disasterid":disaster_id})
     res={}
     res["src"] = cursor["facial"]
-    temp=literal_eval(cursor["victims"])
+    try:
+        temp=literal_eval(cursor["victims"])
+    except:
+        temp=cursor["victims"]
     res["males"]=temp["males"]
     res["children"]=temp["children"]
     res["elders"]=temp["elders"]
