@@ -46,7 +46,11 @@ def resources():
         res+="<td>"+str(cur["City"])+"</td>"
         temps=""
         try:
-            for i in list(literal_eval(cur["items"])):
+            l=list(literal_eval(cur["items"]))
+        except:
+            l=list(cur["items"])
+        try:
+            for i in l:
                 temps=temps+","+i
         except:
             pass
